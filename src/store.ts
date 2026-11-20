@@ -1,14 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
+import {BUILD_COST,spentAcorns,type BuildingId} from './game/buildings';
 
 export type Score={date:string; topic:string; fluency:number; lexical:number; grammar:number; pronunciation:number; notes:string};
 export type Card={interval:number; due:string; seen:number};
+export type QuestResult={best:number;wins:number;last:string};
 export type Progress={
  completed:number[]; notes:Record<string,string>; topicNotes:Record<string,string>; reflection:Record<string,string>;
  rubric:Score[]; cards:Record<string,Card>; reviewedTopics:string[]; quizResults:Record<string,number>;
+ quests:Record<string,QuestResult>;
+ foundSeeds:Record<string,boolean>;
+ decorations:Record<string,string[]>;
  lastVisit:number|null;
 };
 const key='speaklab-progress-v1';
-export const blank=():Progress=>({completed:[],notes:{},topicNotes:{},reflection:{},rubric:[],cards:{},reviewedTopics:[],quizResults:{},lastVisit:null});
+export const blank=():Progress=>({completed:[],notes:{},topicNotes:{},reflection:{},rubric:[],cards:{},reviewedTopics:[],quizResults:{},quests:{},foundSeeds:{},decorations:{},lastVisit:null});
 const object=(value:unknown):value is Record<string,unknown>=>typeof value==='object' && value!==null && !Array.isArray(value);
 export function hydrate(value:unknown):Progress{
   const initial=blank();
@@ -26,6 +31,14 @@ export function hydrate(value:unknown):Progress{
     cards:object(value.cards)?Object.fromEntries(Object.entries(value.cards).filter(([,v])=>object(v)).map(([k,item])=>{const v=item as Record<string,unknown>;return [k,{interval:Number(v.interval||1),due:String(v.due||'1970-01-01'),seen:Number(v.seen||0)}]})):{},
     reviewedTopics:Array.isArray(value.reviewedTopics)?value.reviewedTopics.filter(v=>typeof v==='string'):[],
     quizResults:object(value.quizResults)?Object.fromEntries(Object.entries(value.quizResults).filter(([,v])=>Number.isFinite(v)).map(([k,v])=>[k,Number(v)])):{},
+    quests:object(value.quests)?Object.fromEntries(Object.entries(value.quests).filter(([,v])=>object(v)).map(([k,item])=>{
+      const v=item as Record<string,unknown>;
+      return [k,{best:Math.max(0,Math.min(100,Number(v.best)||0)),wins:Math.max(0,Number(v.wins)||0),last:String(v.last||'')}];
+    })): {},
+    foundSeeds:object(value.foundSeeds)?Object.fromEntries(Object.entries(value.foundSeeds).filter(([,v])=>v===true)) as Record<string,boolean>: {},
+    decorations:object(value.decorations)?Object.fromEntries(Object.entries(value.decorations).filter(([,v])=>Array.isArray(v)).map(([k,v])=>[
+      k,[...new Set((v as unknown[]).filter((id):id is BuildingId=>typeof id==='string'&&BUILD_COST.has(id as BuildingId)))]
+    ])) as Record<string,string[]>:{},
     lastVisit:typeof value.lastVisit==='number'?value.lastVisit:null
   };
 }
@@ -47,7 +60,19 @@ export function useProgress(){
     return {...p,cards:{...p.cards,[id]:{interval,due,seen:(old?.seen||0)+1}}};
   }),[update]);
   const replace=useCallback((value:unknown)=>update(()=>hydrate(value)),[update]);
-  return {progress,update,note,topicNote,complete,practise,score,rateCard,replace,savingError};
+  const awardQuest=useCallback((week:number,kind:string,points:number)=>update(p=>{
+    const id=week+'.'+kind;const old=p.quests[id];
+    return {...p,quests:{...p.quests,[id]:{best:Math.max(old?.best||0,points),wins:(old?.wins||0)+1,last:new Date().toISOString()}}};
+  }),[update]);
+  const buildItem=useCallback((week:number,item:BuildingId)=>update(p=>{
+    const cost=BUILD_COST.get(item);
+    if(!cost||!Number.isInteger(week)||week<1||week>11)return p;
+    const key=String(week),owned=p.decorations[key]||[];
+    const earned=Object.values(p.quests).reduce((sum,v)=>sum+Math.floor(v.best/20),0)+Object.values(p.foundSeeds).filter(Boolean).length;
+    if(owned.includes(item)||earned-spentAcorns(p.decorations)<cost)return p;
+    return {...p,decorations:{...p.decorations,[key]:[...owned,item]}};
+  }),[update]);
+  return {progress,update,note,topicNote,complete,practise,score,rateCard,replace,awardQuest,buildItem,savingError};
 }
 export function exportProgress(progress:Progress){
   const blob=new Blob([JSON.stringify({format:'SpeakLab Village progress',version:2,exportedAt:new Date().toISOString(),progress},null,2)],{type:'application/json'});

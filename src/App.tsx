@@ -1,7 +1,7 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Award, BookOpenText, CheckCircle2, ChevronDown, CircleCheck, CloudOff, Compass, Download, Heart, Leaf, LibraryBig, Menu, Mic2, Search, Settings2, Sparkles, Star, Sun, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Award, BookOpenText, CheckCircle2, ChevronDown, CircleCheck, CloudOff, Compass, Download, Gamepad2, Leaf, LibraryBig, Menu, Mic2, Search, Settings2, Sparkles, Star, Sun, Volume2, VolumeX } from 'lucide-react';
 import { DebateBridge, AudioRecorder, MockScoring, Reflection, SpeakingTimer, StoryCottage, Warmup, WordGarden, TaskIntro } from './Activities';
-import { lessons, topics, topicMap, stationMeta, type Station, type Topic } from './data';
+import { lessons, topics, topicMap, type Station, type Topic } from './data';
 import { exportProgress, useProgress, useReducedMotion } from './store';
 import { worldAudio, type SoundCue } from './audio';
 
@@ -11,8 +11,8 @@ type Route={page:Page;week:number;station:LessonActivity|null;topic:string};
 const pages:Page[]=['village','course','lesson','library','topic','review','mock','progress','settings'];
 const stationNames:Station[]=['garden','story','speak','debate'];
 const activityNames:LessonActivity[]=['warmup','garden','story','speak','debate','wrap'];
-const WorldStage=lazy(()=>import('./World'));
-const topNav:[Page,string,typeof Compass][]=[['village','Village',Compass],['course','Lessons',BookOpenText],['library','Question library',LibraryBig],['review','Recall',Star],['mock','Mock IELTS',Mic2],['progress','My progress',Award]];
+const AdventureGame=lazy(()=>import('./game/AdventureGame'));
+const topNav:[Page,string,typeof Compass][]=[['village','Play Wildwood',Gamepad2],['course','Lessons',BookOpenText],['library','Question library',LibraryBig],['review','Recall',Star],['mock','Mock IELTS',Mic2],['progress','My progress',Award]];
 const initial:Route={page:'village',week:1,station:null,topic:topics[0]?.id||''};
 function readRoute():Route{
   let seg:string[];
@@ -23,17 +23,9 @@ function readRoute():Route{
   const topic=page==='topic'?(topicMap.has(seg[1])?seg[1]:initial.topic):(lessons[week-1].topics.includes(seg[3])?seg[3]:lessons[week-1].topics[0]);
   return {page,week,station,topic};
 }
-function makeHash(r:Route){return '#'+r.page+(r.page==='lesson'?'/'+r.week+'/'+(r.station||'warmup')+'/'+encodeURIComponent(r.topic):r.page==='topic'?'/'+encodeURIComponent(r.topic):'');}
+function makeHash(r:Route){return '#'+r.page+(r.page==='village'?'/'+r.week:r.page==='lesson'?'/'+r.week+'/'+(r.station||'warmup')+'/'+encodeURIComponent(r.topic):r.page==='topic'?'/'+encodeURIComponent(r.topic):'');}
 function PageTitle({eyebrow,title,description}:{eyebrow:string;title:string;description:string}){return <div className="page-title"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{description}</p></div>}
 function Pill({children}:{children:React.ReactNode}){return <span className="pill">{children}</span>}
-function WorldPlaceholder({onSelect}:{onSelect:(station:Station)=>void}){
- return <section className="world-stage" aria-label="SpeakLab Village, loading its optional 3D graphics">
-  <div className="world-fallback" role="group" aria-label="Learning village stations">
-   <div className="world-fallback-scene"><span className="sun-disc"/><div className="fallback-hill hill-far"/><div className="fallback-hill hill-near"/><span className="fallback-cottage">⌂</span></div>
-   <div className="world-fallback-buttons">{stationNames.map(station=><button key={station} onClick={()=>onSelect(station)}>{stationMeta[station].emoji} {stationMeta[station].label}</button>)}</div>
-  </div>
- </section>;
-}
 function RatingDots({count,total=11}:{count:number;total?:number}){return <div className="rating-dots" role="progressbar" aria-label="Course progress" aria-valuenow={count} aria-valuemin={0} aria-valuemax={total}><span style={{width:`${100*count/total}%`}}/></div>}
 function TopicCard({topic,open,practiced}:{topic:Topic;open:()=>void;practiced:boolean}){
  return <button onClick={open} className="topic-card"><div className="topic-number">{topic.id}</div><div className="topic-copy"><h3>{topic.title}</h3><p>{topic.cues.length} Part 2 clues · {topic.discussion.length} Part 3 questions</p></div><div className="topic-arrow">{practiced?<CheckCircle2 size={20}/>:<ArrowRight size={19}/>}</div></button>;
@@ -47,9 +39,6 @@ function Navigation({route,navigate,soundOn,setSoundOn}:{route:Route;navigate:(r
   <nav className={open?'top-nav expanded':'top-nav'} aria-label="Main menu">{topNav.map(([page,label,Icon])=><button key={page} aria-current={route.page===page?'page':undefined} className={route.page===page?'nav-button selected':'nav-button'} onClick={()=>{navigate({page});setOpen(false)}}><Icon size={17} strokeWidth={1.9}/>{label}</button>)}</nav>
   <div className="header-actions"><button className="sound-toggle" onClick={setSoundOn} aria-label={soundOn?'Mute original game sounds':'Enable original game sounds'} aria-pressed={soundOn} title={soundOn?'Sound on':'Sound off'}>{soundOn?<Volume2 size={19}/>:<VolumeX size={19}/>}</button><button className="settings-link" aria-label="Settings and data" onClick={()=>navigate({page:'settings'})}><Settings2 size={19}/></button></div>
  </header>;
-}
-function VillageIntro({nextWeek,completed,navigate}:{nextWeek:number;completed:number;navigate:(r:Partial<Route>)=>void}){
- return <div className="village-intro"><span className="eyebrow"><span className="sparkle-dot"/> A LITTLE WORLD. BIG IDEAS.</span><h1>Every word is <em>an adventure.</em></h1><p>Wander through a cozy English village. Gather new expressions, tell meaningful stories, practise your voice, and discover what you can say.</p><div className="intro-actions"><button className="button dark large" onClick={()=>navigate({page:'lesson',week:nextWeek,station:'garden',topic:lessons[nextWeek-1].topics[0]})}>Continue Week {nextWeek.toString().padStart(2,'0')} <ArrowRight size={18}/></button><button className="button glass" onClick={()=>navigate({page:'course'})}>Explore the course</button></div><div className="intro-metrics"><div><strong>{completed}<small> / 11</small></strong><span>lessons complete</span></div><div><strong>44</strong><span>speaking stories</span></div><div><strong>132</strong><span>deep questions</span></div></div></div>;
 }
 const schedule=[
   ['warmup','Photo discovery','Observe & predict'],
@@ -147,9 +136,9 @@ function SettingsScreen({progress,exportData,replace}:{progress:ReturnType<typeo
  <div className="paper-panel"><span className="eyebrow">ABOUT THE COURSE</span><h3>Independent, free IELTS preparation</h3><p>SpeakLab Village is not associated with the IELTS test owners. It preserves 44 speaking topics and their original questions from the supplied teaching resources; no score in this app guarantees a formal exam result.</p><p className="muted">The whole lesson interface works without a database or third-party API. Microphone recording needs a supported secure browser.</p></div></section>;
 }
 function App(){
- const {progress,note,topicNote,update,rateCard,complete,practise,score,replace,savingError}=useProgress();
+ const {progress,note,topicNote,update,rateCard,complete,practise,score,replace,awardQuest,buildItem,savingError}=useProgress();
  const [route,setRoute]=useState<Route>(readRoute);
- const showWorld=route.page==='village'||route.page==='lesson';
+ const showWorld=route.page==='village';
  const [worldMounted,setWorldMounted]=useState(showWorld);
  useEffect(()=>{if(showWorld)setWorldMounted(true)},[showWorld]);
  const [activeWord,setActiveWord]=useState(0);
@@ -160,25 +149,33 @@ function App(){
  useEffect(()=>{const changed=()=>{setPageVisible(!document.hidden);if(document.hidden)worldAudio.cancel()};document.addEventListener('visibilitychange',changed);return()=>document.removeEventListener('visibilitychange',changed)},[]);
  useEffect(()=>{if(!location.hash)history.replaceState(null,'','#village');const handler=()=>setRoute(readRoute());addEventListener('popstate',handler);addEventListener('hashchange',handler);return()=>{removeEventListener('popstate',handler);removeEventListener('hashchange',handler)}},[]);
  useEffect(()=>{if(!toast)return;const id=setTimeout(()=>setToast(''),3400);return()=>clearTimeout(id)},[toast]);
- const navigate=useCallback((partial:Partial<Route>)=>{const next={...route,...partial};const link=makeHash(next);if(location.hash!==link)history.pushState(null,'',link);setRoute(next);window.scrollTo({top:0,behavior:'instant'})},[route]);
- const next=lessons.find(l=>!progress.completed.includes(l.week))?.week||1;
+ const navigate=useCallback((partial:Partial<Route>)=>{
+   const next={...route,...partial};const link=makeHash(next);
+   if(location.hash!==link)history.pushState(null,'',link);
+   const commit=()=>{setRoute(next);window.scrollTo({top:0,behavior:'instant'})};
+   if(!reduced&&document.startViewTransition)void document.startViewTransition(commit);
+   else commit();
+ },[route,reduced]);
  const currentLesson=lessons[(route.week||1)-1]||lessons[0];
  const currentTopic=topicMap.get(route.topic)||topics[0];
  const eventSound=useCallback((cue:SoundCue)=>{void worldAudio.play(cue)},[]);
  const flipSound=async()=>{if(soundOn){worldAudio.disable();setSoundOn(false);setToast('Original sound muted.')}else{try{const enabled=await worldAudio.enable();if(enabled){setSoundOn(true);void worldAudio.play('arrival')}else{setToast('Sound could not be enabled on this device.')}}catch{setToast('Browser audio is not available.')}}};
- const openStation=useCallback((station:Station)=>{if(route.page!=='lesson')navigate({page:'lesson',week:next,station,topic:lessons[next-1].topics[0]});else navigate({station});eventSound('turn')},[route.page,navigate,next,eventSound]);
  const openWeek=useCallback((week:number)=>{if(week===12){navigate({page:'mock'});return}setActiveWord(0);navigate({page:'lesson',week,station:'garden',topic:lessons[week-1].topics[0]});eventSound('turn')},[navigate,eventSound]);
  return <div className="app-shell">
   <Navigation route={route} navigate={navigate} soundOn={soundOn} setSoundOn={()=>void flipSound()}/>
   <main id="main-content">
-  <div className={route.page==='village'?'world-hero home':route.page==='lesson'?'world-hero lesson':'world-hero tucked'}>
-   {route.page==='village'&&<VillageIntro nextWeek={next} completed={progress.completed.length} navigate={navigate}/>}
-   {route.page==='lesson'&&<div className="world-chapter"><span>CHAPTER {String(route.week).padStart(2,'0')}</span><h1>{currentLesson.title}</h1><p>A new skill to discover, a new story to tell.</p><div className="chapter-nav"><button onClick={()=>openWeek(Math.max(1,route.week-1))} disabled={route.week===1}><ArrowLeft size={17}/> Previous</button><button onClick={()=>openWeek(Math.min(11,route.week+1))} disabled={route.week===11}>Next chapter <ArrowRight size={17}/></button></div></div>}
-   <div className="world-visual">{worldMounted&&<Suspense fallback={<WorldPlaceholder onSelect={openStation}/>}>
-    <WorldStage station={route.page==='lesson'&&stationNames.includes(route.station as Station)?route.station as Station:null} onSelect={openStation} reduced={reduced} active={showWorld&&pageVisible} growth={Object.values(progress.quizResults).filter(v=>v===1).length+progress.completed.length*2} wordCount={currentLesson.expressions.length} activeWord={activeWord} onWordPick={setActiveWord}/>
-   </Suspense>}</div>
+  <div className={route.page==='village'?'adventure-host':'adventure-host is-hidden'}>
+   {worldMounted&&<Suspense fallback={<div className="adventure-loading" role="status">Opening your learning world…</div>}>
+     <AdventureGame week={route.week} active={showWorld&&pageVisible} reduced={reduced} progress={progress} awardQuest={awardQuest}
+       collectSeed={(week,index)=>update(p=>({...p,foundSeeds:{...p.foundSeeds,[week+'.'+index]:true}}))} topicNote={topicNote} buildItem={buildItem}
+       onChapter={week=>navigate({page:'village',week})} onLesson={openWeek} onCue={eventSound}/>
+   </Suspense>}
   </div>
-  {route.page==='village'&&<section className="wide-section village-followup"><div className="section-bar"><div><span className="eyebrow">YOUR ADVENTURE MAP</span><h2>Choose where to grow today.</h2><p>Each place is a different way to practise the same important skills.</p></div><button className="text-action" onClick={()=>navigate({page:'course'})}>All lessons <ArrowRight size={16}/></button></div><div className="station-cards">{stationNames.map((id,i)=><button className="station-card" key={id} onClick={()=>openStation(id)}><div className="station-symbol">{stationMeta[id].emoji}</div><small>QUEST 0{i+1}</small><h3>{stationMeta[id].label}</h3><p>{stationMeta[id].description}</p><span>Enter this place <ArrowRight size={15}/></span></button>)}</div><div className="section-bar latest-heading"><div><span className="eyebrow">YOUR NEXT STORIES</span><h2>A trail made just for practice.</h2></div><button className="text-action" onClick={()=>navigate({page:'library'})}>See all 44 <ArrowRight size={16}/></button></div><div className="featured-lessons">{lessons.slice(0,3).map(l=><button key={l.week} onClick={()=>openWeek(l.week)}><span>CHAPTER {String(l.week).padStart(2,'0')}</span><h3>{l.title}</h3><p>{l.objective}</p><div>Open chapter <ArrowRight size={18}/></div></button>)}</div></section>}
+  {route.page==='lesson'&&<div className="lesson-intro-banner">
+    <div><span className="eyebrow">GUIDED ENGLISH · CHAPTER {String(route.week).padStart(2,'0')}</span><h1>{currentLesson.title}</h1><p>{currentLesson.objective}</p>
+      <div className="chapter-nav"><button onClick={()=>openWeek(Math.max(1,route.week-1))} disabled={route.week===1}><ArrowLeft size={17}/> Previous</button><button onClick={()=>navigate({page:'village',week:route.week})}><Gamepad2 size={17}/> Play this chapter</button><button onClick={()=>openWeek(Math.min(11,route.week+1))} disabled={route.week===11}>Next chapter <ArrowRight size={17}/></button></div>
+    </div><div className="lesson-banner-mark" aria-hidden="true"><span>✦</span><span>❋</span><span>✴</span></div>
+   </div>}
   {route.page==='course'&&<CourseScreen completed={progress.completed} open={openWeek}/>}
   {route.page==='lesson'&&<SchoolDay week={route.week} section={route.station||'warmup'} selectedTopic={route.topic} setTopic={topic=>navigate({topic})} selectActivity={station=>navigate({station})} activeWord={activeWord} onChooseWord={setActiveWord} progress={progress} note={note} topicNote={topicNote} update={update} rateCard={rateCard} complete={complete} practise={practise} onCue={eventSound}/>}
   {route.page==='library'&&<TopicLibrary reviewed={progress.reviewedTopics} open={id=>navigate({page:'topic',topic:id})}/>}
@@ -190,7 +187,6 @@ function App(){
   </main>
   {savingError&&<div role="alert" className="storage-warning">{savingError}</div>}
   {toast&&<div role="status" className="site-toast">{toast}</div>}
-  <footer className="site-footer"><span>✳ SpeakLab Village</span><p>Free, independent IELTS Speaking practice. Not affiliated with IELTS test owners.</p><span>Made for curious minds. <Heart size={14}/></span></footer>
  </div>;
 }
 export default App;
