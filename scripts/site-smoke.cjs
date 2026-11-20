@@ -77,4 +77,3 @@ const errors=[],out=[];
   if(errors.length)process.exitCode=1;
  }finally{await browser.close()}
 })().catch(e=>{console.error('SMOKE FAILED',e);process.exitCode=1});
-

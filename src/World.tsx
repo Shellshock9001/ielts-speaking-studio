@@ -158,4 +158,3 @@ function WorldStage({station,onSelect,reduced,active,growth}:Props){
  </section>;
 }
 export default memo(WorldStage);
-

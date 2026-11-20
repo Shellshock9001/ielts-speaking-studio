@@ -154,4 +154,3 @@ export function MockScoring({topic,onSave}:{topic:string;onSave:(s:Score)=>void}
   <button className="button dark" onClick={()=>onSave({date:new Date().toISOString(),topic,fluency:ratings.fluency,lexical:ratings.lexical,grammar:ratings.grammar,pronunciation:ratings.pronunciation,notes})}>Save practice assessment <Check size={17}/></button>
  </div>;
 }
-

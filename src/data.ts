@@ -20,4 +20,3 @@ export const stationMeta:Record<Station,{label:string;description:string;emoji:s
 };
 export const photos=['friends','library','teamwork','market','nature','cinema'] as const;
 export const photoOfWeek=['friends','library','teamwork','market','nature','cinema','friends','teamwork','nature','market','library'];
-

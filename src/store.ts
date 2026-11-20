@@ -60,4 +60,3 @@ export function useReducedMotion(){
   useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const listener=()=>setReduced(media.matches);media.addEventListener('change',listener);return()=>media.removeEventListener('change',listener)},[]);
   return reduced;
 }
-
