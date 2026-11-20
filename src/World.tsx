@@ -5,7 +5,7 @@ import type { Group } from 'three';
 import type { Station } from './data';
 import { stationMeta } from './data';
 
-type Props={station:Station|null; onSelect:(station:Station)=>void; reduced:boolean; active:boolean; growth:number};
+type Props={station:Station|null; onSelect:(station:Station)=>void; reduced:boolean; active:boolean; growth:number;wordCount:number;activeWord:number;onWordPick:(index:number)=>void};
 type Point=[number,number,number];
 const STATION_POSITION:Record<Station,Point>={garden:[-3.1,.25,1.5],story:[-.95,.22,-1.0],speak:[1.55,.22,1.35],debate:[3.3,.22,-1.15]};
 function Matte({color,roughness=.9}:{color:string;roughness?:number}){return <meshStandardMaterial color={color} roughness={roughness} metalness={0} flatShading/>;}
@@ -55,14 +55,26 @@ function Cottage({onSelect,selected}:{onSelect:()=>void;selected:boolean}){
    <Animal kind="fox" pos={[-1.02,.12,.88]}/>
  </group>;
 }
-function Garden({onSelect,selected,growth}:{onSelect:()=>void;selected:boolean;growth:number}){
+function WordSeed({index,count,selected,onPick,reduced}:{index:number;count:number;selected:boolean;onPick:(index:number)=>void;reduced:boolean}){
+ const ref=useRef<Group>(null);
+ const angle=index*Math.PI*2/count-Math.PI/3;
+ useFrame(({clock})=>{if(!ref.current||reduced)return;ref.current.position.y=.27+Math.sin(clock.elapsedTime*1.9+index*.72)*.045});
+ return <group ref={ref} position={[Math.cos(angle)*.72,.27,Math.sin(angle)*.65]} onClick={e=>{e.stopPropagation();onPick(index)}}>
+  <Cylinder pos={[0,.1,0]} scale={[.12,.23,.12]} color="#679c70"/>
+  <Sphere pos={[0,.32,0]} scale={selected?[.24,.24,.24]:[.19,.2,.19]} color={selected?'#ffda86':'#db9faa'}/>
+  {Array.from({length:4},(_,i)=>{const a=i*Math.PI/2;return <Sphere key={i} pos={[Math.cos(a)*.17,.3,Math.sin(a)*.17]} scale={[.125,.09,.125]} color={selected?'#fff0b6':'#eec2bf'}/>;})}
+  <Sphere pos={[0,.34,0]} scale={[.09,.09,.09]} color={selected?'#c78a5b':'#fff4d4'}/>
+ </group>;
+}
+function Garden({onSelect,selected,growth,wordCount,activeWord,onWordPick,reduced}:{onSelect:()=>void;selected:boolean;growth:number;wordCount:number;activeWord:number;onWordPick:(index:number)=>void;reduced:boolean}){
  const click=(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();onSelect();};
  return <group position={STATION_POSITION.garden} onClick={click}>
   <mesh position={[0,.02,0]} castShadow><cylinderGeometry args={[1.3,1.34,.19,12]}/><Matte color="#d9b99a"/></mesh>
   <mesh position={[0,.16,0]}><cylinderGeometry args={[1.14,1.18,.12,12]}/><Matte color="#7baf88"/></mesh>
   {Array.from({length:Math.min(12,4+growth)},(_,i)=>{const a=i*Math.PI*2/12;return <Flower key={i} pink={i%2===0} pos={[Math.cos(a)*.84,.23,Math.sin(a)*.8]}/>;})}
-  <Tree pos={[-.62,.21,-.47]} size={1.1} blossom/>
-  <Animal kind="bunny" pos={[.45,.3,.43]}/>
+  <Tree pos={[-.89,.21,-.69]} size={.92} blossom/>
+  <Animal kind="bunny" pos={[.95,.23,.55]}/>
+  {selected&&Array.from({length:wordCount},(_,i)=><WordSeed key={i} index={i} count={wordCount} selected={i===activeWord} onPick={onWordPick} reduced={reduced}/>)}
   <Sphere pos={[0,.21,0]} scale={[selected?.34:.25,.14,selected?.34:.25]} color="#f9e6a6"/>
  </group>;
 }
@@ -91,7 +103,7 @@ function Bridge({onSelect,selected}:{onSelect:()=>void;selected:boolean}){
    <Sphere pos={[.95,.14,.02]} scale={[.22,.1,.24]} color="#f4e5cd"/>
  </group>;
 }
-function Island({selected,onSelect,reduced,growth}:{selected:Station|null;onSelect:(station:Station)=>void;reduced:boolean;growth:number}){
+function Island({selected,onSelect,reduced,growth,wordCount,activeWord,onWordPick}:{selected:Station|null;onSelect:(station:Station)=>void;reduced:boolean;growth:number;wordCount:number;activeWord:number;onWordPick:(index:number)=>void}){
  const butterflies=useRef<Group>(null);
  useFrame(({clock})=>{if(!butterflies.current||reduced)return;butterflies.current.rotation.y=clock.getElapsedTime()*.12;butterflies.current.position.y=Math.sin(clock.getElapsedTime()*1.2)*.16;});
  const trees=useMemo<Point[]>(()=>[[-4.95,.1,-.8],[-3.8,.1,-2.55],[-2.1,.1,-2.55],[.08,.1,-2.55],[1.2,.1,-2.38],[4.68,.1,-1.45],[4.8,.1,.88],[-4.7,.1,2.32],[.25,.1,2.65],[3.1,.1,2.65]],[]);
@@ -103,7 +115,7 @@ function Island({selected,onSelect,reduced,growth}:{selected:Station|null;onSele
    {trees.map((p,i)=><Tree key={i} pos={p} size={i%3===0?.85:1.05} blossom={i===2||i===7}/>)}
    {Array.from({length:22},(_,i)=>{const a=i*2.399;const r=1.3+(i%4)*1.02;return <Flower key={i} pos={[Math.cos(a)*r,.09,Math.sin(a)*r*.65]} pink={i%3===0}/>;})}
    {Array.from({length:9},(_,i)=><Sphere key={i} pos={[-3.5+i*.8,.05,.15+Math.sin(i*.8)*.14]} scale={[.24,.045,.17]} color="#e6d5ad"/>)}
-   <Garden onSelect={()=>onSelect('garden')} selected={selected==='garden'} growth={growth}/>
+   <Garden onSelect={()=>onSelect('garden')} selected={selected==='garden'} growth={growth} wordCount={wordCount} activeWord={activeWord} onWordPick={onWordPick} reduced={reduced}/>
    <Cottage onSelect={()=>onSelect('story')} selected={selected==='story'}/>
    <Speaking onSelect={()=>onSelect('speak')} selected={selected==='speak'}/>
    <Bridge onSelect={()=>onSelect('debate')} selected={selected==='debate'}/>
@@ -114,42 +126,72 @@ function Island({selected,onSelect,reduced,growth}:{selected:Station|null;onSele
  </group>;
 }
 function CameraRig({station,reduced}:{station:Station|null;reduced:boolean}){
- const {camera,size}=useThree();
+ const {camera,size,invalidate}=useThree();
  const target=useRef(new THREE.Vector3(0,0,0));
+ const destination=useMemo(()=>{
+   const position=station?STATION_POSITION[station]:[0,0,0] as Point;
+   const distance=size.width<550?.89:size.width<900?.79:.83;
+   return {
+     eye:new THREE.Vector3(position[0]*.35+8.4*distance,position[1]*.2+8.7*distance,position[2]*.25+12.4*distance),
+     look:new THREE.Vector3(position[0]*.35,.15,position[2]*.27),
+     fov:size.width<540?48:size.width<900?43:37
+   };
+ },[station,size.width]);
+ useEffect(()=>{
+   if(!reduced)return;
+   camera.position.copy(destination.eye);
+   target.current.copy(destination.look);
+   camera.lookAt(destination.look);
+   if(camera instanceof THREE.PerspectiveCamera){camera.fov=destination.fov;camera.updateProjectionMatrix();}
+   invalidate();
+ },[reduced,camera,destination,invalidate]);
  useFrame((_,delta)=>{
-  const position=station?STATION_POSITION[station]:[0,0,0] as Point;
-  const distance=size.width<550?.89:size.width<900?.79:.83;
-  const desired=new THREE.Vector3(position[0]*.35+8.4*distance,position[1]*.2+8.7*distance,position[2]*.25+12.4*distance);
-  const look=new THREE.Vector3(position[0]*.35,.15,position[2]*.27);
-  const speed=reduced?1:1-Math.exp(-delta*3.9);
-  camera.position.lerp(desired,speed);target.current.lerp(look,speed);camera.lookAt(target.current);
-  if(camera instanceof THREE.PerspectiveCamera){const fov=size.width<540?48:size.width<900?43:37;if(Math.abs(camera.fov-fov)>.15){camera.fov=fov;camera.updateProjectionMatrix();}}
+  if(reduced)return;
+  const speed=1-Math.exp(-delta*3.9);
+  camera.position.lerp(destination.eye,speed);target.current.lerp(destination.look,speed);camera.lookAt(target.current);
+  if(camera instanceof THREE.PerspectiveCamera&&Math.abs(camera.fov-destination.fov)>.15){camera.fov=destination.fov;camera.updateProjectionMatrix();}
  });
  return null;
 }
-function WorldScene({station,onSelect,reduced,growth}:{station:Station|null;onSelect:(s:Station)=>void;reduced:boolean;growth:number}){
+function WorldScene({station,onSelect,reduced,growth,wordCount,activeWord,onWordPick}:{station:Station|null;onSelect:(s:Station)=>void;reduced:boolean;growth:number;wordCount:number;activeWord:number;onWordPick:(index:number)=>void}){
  return <>
  <fog attach="fog" args={['#dceadf',17,33]}/>
  <hemisphereLight args={['#fff4e2','#779995',1.5]}/>
  <ambientLight intensity={.2}/>
  <directionalLight position={[4,11,7]} intensity={1.85} color="#fff4d1" castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} shadow-camera-near={.5} shadow-camera-far={36} shadow-camera-left={-9} shadow-camera-right={9} shadow-camera-top={9} shadow-camera-bottom={-9}/>
  <CameraRig station={station} reduced={reduced}/>
- <Island selected={station} onSelect={onSelect} reduced={reduced} growth={growth}/>
+ <Island selected={station} onSelect={onSelect} reduced={reduced} growth={growth} wordCount={wordCount} activeWord={activeWord} onWordPick={onWordPick}/>
  </>;
 }
 function Fallback({onSelect}:{onSelect:(s:Station)=>void}){return <div className="world-fallback" role="group" aria-label="SpeakLab village stations">
  <div className="world-fallback-scene"><span className="sun-disc"/><div className="fallback-hill hill-far"/><div className="fallback-hill hill-near"/><span className="fallback-cottage">⌂</span></div>
  <div className="world-fallback-buttons">{(Object.keys(stationMeta) as Station[]).map(id=><button key={id} onClick={()=>onSelect(id)}>{stationMeta[id].emoji} {stationMeta[id].label}</button>)}</div>
  </div>}
-function WorldStage({station,onSelect,reduced,active,growth}:Props){
+function WorldStage({station,onSelect,reduced,active,growth,wordCount,activeWord,onWordPick}:Props){
  const [supported,setSupported]=useState<boolean|null>(null);
+ const [onscreen,setOnscreen]=useState(true);
+ const container=useRef<HTMLElement>(null);
  useEffect(()=>{try{const canvas=document.createElement('canvas');setSupported(!!(canvas.getContext('webgl2')||canvas.getContext('webgl')))}catch{setSupported(false)}},[]);
- return <section className="world-stage" aria-label="Interactive three-dimensional learning village">
+ useEffect(()=>{
+   const element=container.current;
+   if(!element||!('IntersectionObserver' in window))return;
+   const observer=new IntersectionObserver(entries=>setOnscreen(Boolean(entries[0]?.isIntersecting)),{threshold:.01});
+   observer.observe(element);
+   return()=>observer.disconnect();
+ },[]);
+ return <section ref={container} className="world-stage" aria-label="Interactive three-dimensional learning village">
   <div className="world-sky"><span className="world-cloud cloud-one"/><span className="world-cloud cloud-two"/><span className="world-sun"/></div>
-  {supported?<Canvas dpr={[1,Math.min(window.devicePixelRatio,1.6)]} shadows="basic" gl={{antialias:true,alpha:true,powerPreference:'high-performance'}} camera={{position:[8.4,8.7,12.4],fov:37,near:.1,far:60}} frameloop={active&&!reduced?'always':'demand'} onCreated={({gl})=>gl.setClearColor('#f1eee0',0)}>
-    <WorldScene station={station} onSelect={onSelect} reduced={reduced} growth={growth}/>
+  {supported?<Canvas dpr={[1,Math.min(window.devicePixelRatio,1.5)]} shadows="basic" gl={{antialias:true,alpha:true,powerPreference:'high-performance'}} camera={{position:[8.4,8.7,12.4],fov:37,near:.1,far:60}} frameloop={active&&onscreen&&!reduced?'always':'demand'} onCreated={({gl})=>{
+    gl.setClearColor('#f1eee0',0);
+    gl.domElement.addEventListener('webglcontextlost',()=>setSupported(false),{once:true});
+  }}>
+    <WorldScene station={station} onSelect={onSelect} reduced={reduced} growth={growth} wordCount={wordCount} activeWord={activeWord} onWordPick={onWordPick}/>
    </Canvas>:<Fallback onSelect={onSelect}/>}
   <div className="world-attribution"><span className="live-dot"/> {supported?'Living 3D village':'Storybook village'}</div>
+  {station==='garden'&&<div className="world-word-picker" role="group" aria-label="Choose a word flower">
+    <span>Pick a flower</span>
+    {Array.from({length:wordCount},(_,index)=><button key={index} type="button" aria-pressed={activeWord===index} aria-label={'Word flower '+(index+1)} onClick={()=>onWordPick(index)}>{index+1}</button>)}
+  </div>}
   <div className="world-location-labels" aria-label="Village landmarks">
     {(Object.keys(stationMeta) as Station[]).map((id)=> <button type="button" className={station===id?'world-tag is-current':'world-tag'} key={id} onClick={()=>onSelect(id)} aria-pressed={station===id}>
        <span>{stationMeta[id].emoji}</span>{stationMeta[id].label}

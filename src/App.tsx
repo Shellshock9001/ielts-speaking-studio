@@ -1,34 +1,46 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Award, BookOpenText, CheckCircle2, ChevronDown, CircleCheck, CloudOff, Compass, Download, Heart, Leaf, LibraryBig, Menu, Mic2, Search, Settings2, Sparkles, Star, Sun, Volume2, VolumeX } from 'lucide-react';
-import WorldStage from './World';
 import { DebateBridge, AudioRecorder, MockScoring, Reflection, SpeakingTimer, StoryCottage, Warmup, WordGarden, TaskIntro } from './Activities';
 import { lessons, topics, topicMap, stationMeta, type Station, type Topic } from './data';
 import { exportProgress, useProgress, useReducedMotion } from './store';
 import { worldAudio, type SoundCue } from './audio';
 
 type Page='village'|'course'|'lesson'|'library'|'topic'|'review'|'mock'|'progress'|'settings';
-type Route={page:Page;week:number;station:Station|null;topic:string};
+type LessonActivity='warmup'|Station|'wrap';
+type Route={page:Page;week:number;station:LessonActivity|null;topic:string};
 const pages:Page[]=['village','course','lesson','library','topic','review','mock','progress','settings'];
 const stationNames:Station[]=['garden','story','speak','debate'];
+const activityNames:LessonActivity[]=['warmup','garden','story','speak','debate','wrap'];
+const WorldStage=lazy(()=>import('./World'));
 const topNav:[Page,string,typeof Compass][]=[['village','Village',Compass],['course','Lessons',BookOpenText],['library','Question library',LibraryBig],['review','Recall',Star],['mock','Mock IELTS',Mic2],['progress','My progress',Award]];
 const initial:Route={page:'village',week:1,station:null,topic:topics[0]?.id||''};
 function readRoute():Route{
-  const seg=decodeURIComponent(location.hash.slice(1)).split('/');
+  let seg:string[];
+  try{seg=decodeURIComponent(location.hash.slice(1)).split('/')}catch{seg=['village']}
   const page=pages.includes(seg[0] as Page)?seg[0] as Page:'village';
   const week=Math.max(1,Math.min(11,Number(seg[1])||1));
-  const station=stationNames.includes(seg[2] as Station)?seg[2] as Station:null;
-  const topic=page==='topic'?(seg[1]||initial.topic):(seg[3]||initial.topic);
+  const station=activityNames.includes(seg[2] as LessonActivity)?seg[2] as LessonActivity:'warmup';
+  const topic=page==='topic'?(topicMap.has(seg[1])?seg[1]:initial.topic):(lessons[week-1].topics.includes(seg[3])?seg[3]:lessons[week-1].topics[0]);
   return {page,week,station,topic};
 }
-function makeHash(r:Route){return '#'+r.page+(r.page==='lesson'?'/'+r.week+'/'+(r.station||'garden')+'/'+encodeURIComponent(r.topic):r.page==='topic'?'/'+encodeURIComponent(r.topic):'');}
+function makeHash(r:Route){return '#'+r.page+(r.page==='lesson'?'/'+r.week+'/'+(r.station||'warmup')+'/'+encodeURIComponent(r.topic):r.page==='topic'?'/'+encodeURIComponent(r.topic):'');}
 function PageTitle({eyebrow,title,description}:{eyebrow:string;title:string;description:string}){return <div className="page-title"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{description}</p></div>}
 function Pill({children}:{children:React.ReactNode}){return <span className="pill">{children}</span>}
+function WorldPlaceholder({onSelect}:{onSelect:(station:Station)=>void}){
+ return <section className="world-stage" aria-label="SpeakLab Village, loading its optional 3D graphics">
+  <div className="world-fallback" role="group" aria-label="Learning village stations">
+   <div className="world-fallback-scene"><span className="sun-disc"/><div className="fallback-hill hill-far"/><div className="fallback-hill hill-near"/><span className="fallback-cottage">⌂</span></div>
+   <div className="world-fallback-buttons">{stationNames.map(station=><button key={station} onClick={()=>onSelect(station)}>{stationMeta[station].emoji} {stationMeta[station].label}</button>)}</div>
+  </div>
+ </section>;
+}
 function RatingDots({count,total=11}:{count:number;total?:number}){return <div className="rating-dots" role="progressbar" aria-label="Course progress" aria-valuenow={count} aria-valuemin={0} aria-valuemax={total}><span style={{width:`${100*count/total}%`}}/></div>}
 function TopicCard({topic,open,practiced}:{topic:Topic;open:()=>void;practiced:boolean}){
  return <button onClick={open} className="topic-card"><div className="topic-number">{topic.id}</div><div className="topic-copy"><h3>{topic.title}</h3><p>{topic.cues.length} Part 2 clues · {topic.discussion.length} Part 3 questions</p></div><div className="topic-arrow">{practiced?<CheckCircle2 size={20}/>:<ArrowRight size={19}/>}</div></button>;
 }
 function Navigation({route,navigate,soundOn,setSoundOn}:{route:Route;navigate:(r:Partial<Route>)=>void;soundOn:boolean;setSoundOn:()=>void}){
  const [open,setOpen]=useState(false);
+ useEffect(()=>{if(!open)return;const close=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};document.addEventListener('keydown',close);return()=>document.removeEventListener('keydown',close)},[open]);
  return <header className="site-header">
   <a href="#village" className="brand" onClick={e=>{e.preventDefault();navigate({page:'village'});setOpen(false)}} aria-label="SpeakLab Village home"><span className="brand-emblem"><Leaf size={24}/></span><span><strong>SpeakLab<span> Village</span></strong><small>YOUR ENGLISH ADVENTURE</small></span></a>
   <button className="mobile-menu-button" aria-expanded={open} aria-label={open?'Close navigation':'Open navigation'} onClick={()=>setOpen(v=>!v)}><Menu size={23}/></button>
@@ -37,7 +49,7 @@ function Navigation({route,navigate,soundOn,setSoundOn}:{route:Route;navigate:(r
  </header>;
 }
 function VillageIntro({nextWeek,completed,navigate}:{nextWeek:number;completed:number;navigate:(r:Partial<Route>)=>void}){
- return <div className="village-intro"><span className="eyebrow"><span className="sparkle-dot"/> A LITTLE WORLD. BIG IDEAS.</span><h1>Every word is <em>an adventure.</em></h1><p>Wander through a cozy English village. Gather new expressions, tell meaningful stories, practise your voice, and discover what you can say.</p><div className="intro-actions"><button className="button dark large" onClick={()=>navigate({page:'lesson',week:nextWeek,station:'garden'})}>Continue Week {nextWeek.toString().padStart(2,'0')} <ArrowRight size={18}/></button><button className="button glass" onClick={()=>navigate({page:'course'})}>Explore the course</button></div><div className="intro-metrics"><div><strong>{completed}<small> / 11</small></strong><span>lessons complete</span></div><div><strong>44</strong><span>speaking stories</span></div><div><strong>132</strong><span>deep questions</span></div></div></div>;
+ return <div className="village-intro"><span className="eyebrow"><span className="sparkle-dot"/> A LITTLE WORLD. BIG IDEAS.</span><h1>Every word is <em>an adventure.</em></h1><p>Wander through a cozy English village. Gather new expressions, tell meaningful stories, practise your voice, and discover what you can say.</p><div className="intro-actions"><button className="button dark large" onClick={()=>navigate({page:'lesson',week:nextWeek,station:'garden',topic:lessons[nextWeek-1].topics[0]})}>Continue Week {nextWeek.toString().padStart(2,'0')} <ArrowRight size={18}/></button><button className="button glass" onClick={()=>navigate({page:'course'})}>Explore the course</button></div><div className="intro-metrics"><div><strong>{completed}<small> / 11</small></strong><span>lessons complete</span></div><div><strong>44</strong><span>speaking stories</span></div><div><strong>132</strong><span>deep questions</span></div></div></div>;
 }
 const schedule=[
   ['warmup','Photo discovery','Observe & predict'],
@@ -47,22 +59,28 @@ const schedule=[
   ['debate','Debate Bridge','Reason & discuss'],
   ['wrap','Reflection','Remember & grow']
 ] as const;
-function LessonMenu({station,select,finished}:{station:string;select:(station:string)=>void;finished:boolean}){
- return <div className="quest-rail" role="tablist" aria-label="Learning activities">{schedule.map(([key,title,subtitle],i)=><button role="tab" aria-selected={station===key} key={key} className={station===key?'quest-link selected':'quest-link'} onClick={()=>select(key)}><span className="quest-index">{String(i+1).padStart(2,'0')}</span><span><strong>{title}</strong><small>{subtitle}</small></span><span className="quest-link-end">{key==='wrap'&&finished?<CheckCircle2 size={18}/>:<ArrowRight size={15}/>}</span></button>)}</div>;
+function LessonMenu({station,select,finished}:{station:LessonActivity;select:(station:LessonActivity)=>void;finished:boolean}){
+ const handleKeys=(event:React.KeyboardEvent,position:number)=>{
+   const next=event.key==='Home'?0:event.key==='End'?schedule.length-1:event.key==='ArrowRight'||event.key==='ArrowDown'?(position+1)%schedule.length:event.key==='ArrowLeft'||event.key==='ArrowUp'?(position+schedule.length-1)%schedule.length:null;
+   if(next===null)return;
+   event.preventDefault();
+   const key=schedule[next][0];
+   select(key);
+   requestAnimationFrame(()=>document.getElementById('lesson-tab-'+key)?.focus());
+ };
+ return <div className="quest-rail" role="tablist" aria-label="Learning activities">{schedule.map(([key,title,subtitle],i)=><button role="tab" tabIndex={station===key?0:-1} aria-controls="lesson-activity" aria-selected={station===key} id={'lesson-tab-'+key} key={key} className={station===key?'quest-link selected':'quest-link'} onClick={()=>select(key)} onKeyDown={event=>handleKeys(event,i)}><span className="quest-index">{String(i+1).padStart(2,'0')}</span><span><strong>{title}</strong><small>{subtitle}</small></span><span className="quest-link-end">{key==='wrap'&&finished?<CheckCircle2 size={18}/>:<ArrowRight size={15}/>}</span></button>)}</div>;
 }
-function SchoolDay({week,station,selectedTopic,setTopic,progress,note,topicNote,update,rateCard,complete,practise,onCue}:{week:number;station:Station|null;selectedTopic:string;setTopic:(id:string)=>void;progress:ReturnType<typeof useProgress>['progress'];note:ReturnType<typeof useProgress>['note'];topicNote:ReturnType<typeof useProgress>['topicNote'];update:ReturnType<typeof useProgress>['update'];rateCard:ReturnType<typeof useProgress>['rateCard'];complete:ReturnType<typeof useProgress>['complete'];practise:ReturnType<typeof useProgress>['practise'];onCue:(cue:SoundCue)=>void}){
- const [section,setSection]=useState<string>(station||'warmup');
- useEffect(()=>setSection(station||'warmup'),[station,week]);
+function SchoolDay({week,section,selectedTopic,setTopic,selectActivity,activeWord,onChooseWord,progress,note,topicNote,update,rateCard,complete,practise,onCue}:{week:number;section:LessonActivity;selectedTopic:string;setTopic:(id:string)=>void;selectActivity:(activity:LessonActivity)=>void;activeWord:number;onChooseWord:(index:number)=>void;progress:ReturnType<typeof useProgress>['progress'];note:ReturnType<typeof useProgress>['note'];topicNote:ReturnType<typeof useProgress>['topicNote'];update:ReturnType<typeof useProgress>['update'];rateCard:ReturnType<typeof useProgress>['rateCard'];complete:ReturnType<typeof useProgress>['complete'];practise:ReturnType<typeof useProgress>['practise'];onCue:(cue:SoundCue)=>void}){
  const lesson=lessons[week-1]||lessons[0];
  const collection=lesson.topics.map(id=>topicMap.get(id)).filter((t):t is Topic=>Boolean(t));
  const topic=collection.find(t=>t.id===selectedTopic)||collection[0];
- const stationSelect=(key:string)=>{setSection(key);if(stationNames.includes(key as Station))onCue('turn')};
+ const stationSelect=(key:LessonActivity)=>{selectActivity(key);if(stationNames.includes(key as Station))onCue('turn')};
  return <section className="course-screen"><div className="section-bar"><div><span className="eyebrow">CHAPTER {String(week).padStart(2,'0')} / 11</span><h2>{lesson.title}</h2><p>{lesson.objective}</p></div><Pill>75-minute guided lesson</Pill></div>
    <div className="lesson-workspace"><aside className="lesson-side"><div className="side-heading"><span className="eyebrow">TODAY'S JOURNEY</span><p>Six small steps, one clearer voice.</p></div><LessonMenu station={section} select={stationSelect} finished={progress.completed.includes(week)}/><div className="lesson-side-note"><Sun size={22}/><p>English grows through meaningful practice—not memorized answers.</p></div></aside>
-   <div className="activity-content" key={week+'-'+section}>
+   <div className="activity-content" id="lesson-activity" role="tabpanel" aria-labelledby={'lesson-tab-'+section} key={week+'-'+section}>
     {section==='warmup'&&<Warmup lesson={lesson} progress={progress} note={note} topicNote={topicNote} rateCard={rateCard} update={update}/>}
-    {section==='garden'&&<WordGarden lesson={lesson} progress={progress} note={note} topicNote={topicNote} rateCard={rateCard} update={update} onCue={onCue}/>}
-    {section==='story'&&<StoryCottage lesson={lesson} topics={collection} topic={topic} select={setTopic} progress={progress} topicNote={topicNote} onCue={onCue}/>}
+    {section==='garden'&&<WordGarden lesson={lesson} progress={progress} note={note} topicNote={topicNote} rateCard={rateCard} update={update} onCue={onCue} activeWord={activeWord} onChooseWord={onChooseWord}/>}
+    {section==='story'&&<StoryCottage lesson={lesson} topics={collection} topic={topic} select={setTopic} progress={progress} topicNote={topicNote}/>}
     {section==='speak'&&<div className="activity-stack"><TaskIntro eyebrow="THE SPEAKING DOCK" title="Find your confident voice">Take one minute to prepare, then speak for up to two minutes. Record your voice and listen for improvement.</TaskIntro>
       <div className="paper-panel"><label className="field-label">Your speaking topic</label><select className="text-field" value={topic.id} onChange={e=>setTopic(e.target.value)}>{collection.map(t=><option key={t.id} value={t.id}>{t.title}</option>)}</select><div className="cue-paper compact"><span className="eyebrow">PART 2 · SPEAK FROM EXPERIENCE</span><h3>{topic.title}</h3>{topic.cues.map(c=><p key={c}>✦ &nbsp;{c}</p>)}</div></div>
       <div className="timer-grid"><div className="paper-panel"><h3>Prepare your ideas</h3><SpeakingTimer minutes={1} label="PREPARE"/></div><div className="paper-panel"><h3>Tell your story</h3><SpeakingTimer minutes={2} label="SPEAK"/></div></div><AudioRecorder/>
@@ -70,7 +88,7 @@ function SchoolDay({week,station,selectedTopic,setTopic,progress,note,topicNote,
     </div>}
     {section==='debate'&&<DebateBridge topic={topic} progress={progress} topicNote={topicNote}/>}
     {section==='wrap'&&<Reflection lesson={lesson} progress={progress} note={note} complete={complete} onCue={onCue}/>}
-    <div className="activity-footer"><span>{lesson.homework.slice(0,145)}{lesson.homework.length>145?'…':''}</span><button className="text-action" onClick={()=>{const i=schedule.findIndex(x=>x[0]===section);setSection(schedule[Math.min(i+1,schedule.length-1)][0])}}>Next activity <ArrowRight size={17}/></button></div>
+    <div className="activity-footer"><span>{lesson.homework.slice(0,145)}{lesson.homework.length>145?'…':''}</span>{section!=='wrap'&&<button className="text-action" onClick={()=>{const i=schedule.findIndex(x=>x[0]===section);stationSelect(schedule[i+1][0])}}>Next activity <ArrowRight size={17}/></button>}</div>
    </div></div>
  </section>;
 }
@@ -131,34 +149,38 @@ function SettingsScreen({progress,exportData,replace}:{progress:ReturnType<typeo
 function App(){
  const {progress,note,topicNote,update,rateCard,complete,practise,score,replace,savingError}=useProgress();
  const [route,setRoute]=useState<Route>(readRoute);
- const [selectedTopic,setSelectedTopic]=useState(topics[0]?.id||'');
+ const showWorld=route.page==='village'||route.page==='lesson';
+ const [worldMounted,setWorldMounted]=useState(showWorld);
+ useEffect(()=>{if(showWorld)setWorldMounted(true)},[showWorld]);
+ const [activeWord,setActiveWord]=useState(0);
  const [soundOn,setSoundOn]=useState(false);
  const [toast,setToast]=useState('');
  const [pageVisible,setPageVisible]=useState(!document.hidden);
  const reduced=useReducedMotion();
  useEffect(()=>{const changed=()=>{setPageVisible(!document.hidden);if(document.hidden)worldAudio.cancel()};document.addEventListener('visibilitychange',changed);return()=>document.removeEventListener('visibilitychange',changed)},[]);
- useEffect(()=>{if(!location.hash)history.replaceState(null,'','#village');const handler=()=>setRoute(readRoute());addEventListener('hashchange',handler);return()=>removeEventListener('hashchange',handler)},[]);
+ useEffect(()=>{if(!location.hash)history.replaceState(null,'','#village');const handler=()=>setRoute(readRoute());addEventListener('popstate',handler);addEventListener('hashchange',handler);return()=>{removeEventListener('popstate',handler);removeEventListener('hashchange',handler)}},[]);
  useEffect(()=>{if(!toast)return;const id=setTimeout(()=>setToast(''),3400);return()=>clearTimeout(id)},[toast]);
- const navigate=useCallback((partial:Partial<Route>)=>{setRoute(prev=>{const next={...prev,...partial};const link=makeHash(next);if(location.hash!==link)history.pushState(null,'',link);return next;});window.scrollTo({top:0,behavior:'instant'})},[]);
+ const navigate=useCallback((partial:Partial<Route>)=>{const next={...route,...partial};const link=makeHash(next);if(location.hash!==link)history.pushState(null,'',link);setRoute(next);window.scrollTo({top:0,behavior:'instant'})},[route]);
  const next=lessons.find(l=>!progress.completed.includes(l.week))?.week||1;
  const currentLesson=lessons[(route.week||1)-1]||lessons[0];
  const currentTopic=topicMap.get(route.topic)||topics[0];
- const eventSound=(cue:SoundCue)=>{void worldAudio.play(cue)};
+ const eventSound=useCallback((cue:SoundCue)=>{void worldAudio.play(cue)},[]);
  const flipSound=async()=>{if(soundOn){worldAudio.disable();setSoundOn(false);setToast('Original sound muted.')}else{try{const enabled=await worldAudio.enable();if(enabled){setSoundOn(true);void worldAudio.play('arrival')}else{setToast('Sound could not be enabled on this device.')}}catch{setToast('Browser audio is not available.')}}};
- const openStation=(station:Station)=>{if(route.page!=='lesson')navigate({page:'lesson',week:next,station,topic:currentLesson.topics[0]||topics[0].id});else navigate({station});eventSound('turn')};
- const openWeek=(week:number)=>{if(week===12){navigate({page:'mock'});return}navigate({page:'lesson',week,station:'garden',topic:lessons[week-1].topics[0]});eventSound('turn')};
- const showWorld=route.page==='village'||route.page==='lesson';
+ const openStation=useCallback((station:Station)=>{if(route.page!=='lesson')navigate({page:'lesson',week:next,station,topic:lessons[next-1].topics[0]});else navigate({station});eventSound('turn')},[route.page,navigate,next,eventSound]);
+ const openWeek=useCallback((week:number)=>{if(week===12){navigate({page:'mock'});return}setActiveWord(0);navigate({page:'lesson',week,station:'garden',topic:lessons[week-1].topics[0]});eventSound('turn')},[navigate,eventSound]);
  return <div className="app-shell">
   <Navigation route={route} navigate={navigate} soundOn={soundOn} setSoundOn={()=>void flipSound()}/>
   <main id="main-content">
   <div className={route.page==='village'?'world-hero home':route.page==='lesson'?'world-hero lesson':'world-hero tucked'}>
    {route.page==='village'&&<VillageIntro nextWeek={next} completed={progress.completed.length} navigate={navigate}/>}
    {route.page==='lesson'&&<div className="world-chapter"><span>CHAPTER {String(route.week).padStart(2,'0')}</span><h1>{currentLesson.title}</h1><p>A new skill to discover, a new story to tell.</p><div className="chapter-nav"><button onClick={()=>openWeek(Math.max(1,route.week-1))} disabled={route.week===1}><ArrowLeft size={17}/> Previous</button><button onClick={()=>openWeek(Math.min(11,route.week+1))} disabled={route.week===11}>Next chapter <ArrowRight size={17}/></button></div></div>}
-   <div className="world-visual"><WorldStage station={route.page==='lesson'?route.station:null} onSelect={openStation} reduced={reduced} active={showWorld&&pageVisible} growth={Object.values(progress.quizResults).filter(v=>v===1).length+progress.completed.length*2}/></div>
+   <div className="world-visual">{worldMounted&&<Suspense fallback={<WorldPlaceholder onSelect={openStation}/>}>
+    <WorldStage station={route.page==='lesson'&&stationNames.includes(route.station as Station)?route.station as Station:null} onSelect={openStation} reduced={reduced} active={showWorld&&pageVisible} growth={Object.values(progress.quizResults).filter(v=>v===1).length+progress.completed.length*2} wordCount={currentLesson.expressions.length} activeWord={activeWord} onWordPick={setActiveWord}/>
+   </Suspense>}</div>
   </div>
   {route.page==='village'&&<section className="wide-section village-followup"><div className="section-bar"><div><span className="eyebrow">YOUR ADVENTURE MAP</span><h2>Choose where to grow today.</h2><p>Each place is a different way to practise the same important skills.</p></div><button className="text-action" onClick={()=>navigate({page:'course'})}>All lessons <ArrowRight size={16}/></button></div><div className="station-cards">{stationNames.map((id,i)=><button className="station-card" key={id} onClick={()=>openStation(id)}><div className="station-symbol">{stationMeta[id].emoji}</div><small>QUEST 0{i+1}</small><h3>{stationMeta[id].label}</h3><p>{stationMeta[id].description}</p><span>Enter this place <ArrowRight size={15}/></span></button>)}</div><div className="section-bar latest-heading"><div><span className="eyebrow">YOUR NEXT STORIES</span><h2>A trail made just for practice.</h2></div><button className="text-action" onClick={()=>navigate({page:'library'})}>See all 44 <ArrowRight size={16}/></button></div><div className="featured-lessons">{lessons.slice(0,3).map(l=><button key={l.week} onClick={()=>openWeek(l.week)}><span>CHAPTER {String(l.week).padStart(2,'0')}</span><h3>{l.title}</h3><p>{l.objective}</p><div>Open chapter <ArrowRight size={18}/></div></button>)}</div></section>}
   {route.page==='course'&&<CourseScreen completed={progress.completed} open={openWeek}/>}
-  {route.page==='lesson'&&<SchoolDay week={route.week} station={route.station} selectedTopic={selectedTopic} setTopic={setSelectedTopic} progress={progress} note={note} topicNote={topicNote} update={update} rateCard={rateCard} complete={complete} practise={practise} onCue={eventSound}/>}
+  {route.page==='lesson'&&<SchoolDay week={route.week} section={route.station||'warmup'} selectedTopic={route.topic} setTopic={topic=>navigate({topic})} selectActivity={station=>navigate({station})} activeWord={activeWord} onChooseWord={setActiveWord} progress={progress} note={note} topicNote={topicNote} update={update} rateCard={rateCard} complete={complete} practise={practise} onCue={eventSound}/>}
   {route.page==='library'&&<TopicLibrary reviewed={progress.reviewedTopics} open={id=>navigate({page:'topic',topic:id})}/>}
   {route.page==='topic'&&<TopicPage topic={currentTopic} progress={progress} topicNote={topicNote} practise={practise} back={()=>navigate({page:'library'})}/>}
   {route.page==='review'&&<RecallScreen progress={progress} rateCard={rateCard} onCue={eventSound}/>}

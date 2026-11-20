@@ -24,14 +24,23 @@ export function Warmup({lesson,progress,note}:LProps){
    <div className="prompt-ribbon">{lesson.warmup.map((q,i)=><span key={i}>{q}</span>)}</div>
   </div>;
 }
-export function WordGarden({lesson,progress,note,rateCard,update,onCue}:LProps){
- const [index,setIndex]=useState(0),[revealed,setRevealed]=useState(false),[input,setInput]=useState(''),[outcome,setOutcome]=useState<'right'|'again'|null>(null);
+export function WordGarden({lesson,progress,note,rateCard,update,onCue,activeWord,onChooseWord}:LProps&{activeWord:number;onChooseWord:(index:number)=>void}){
+ const [revealed,setRevealed]=useState(false),[input,setInput]=useState(''),[outcome,setOutcome]=useState<'right'|'again'|null>(null);
  const [left,setLeft]=useState<number|null>(null),[matched,setMatched]=useState<number[]>([]);
- const expressions=lesson.expressions; const active=expressions[index]||expressions[0];
+ const [matchFeedback,setMatchFeedback]=useState('');
+ const expressions=lesson.expressions; const index=Math.max(0,Math.min(activeWord,expressions.length-1));const active=expressions[index]||expressions[0];
  const shuffled=useMemo(()=>expressions.map((_,i)=>(i+2)%expressions.length),[expressions]);
- const next=()=>{setIndex(i=>(i+1)%expressions.length);setRevealed(false);setInput('');setOutcome(null);};
+ useEffect(()=>{setRevealed(false);setInput('');setOutcome(null)},[index]);
+ const choose=(nextIndex:number)=>{onChooseWord(nextIndex);setRevealed(false);setInput('');setOutcome(null);};
+ const next=()=>choose((index+1)%expressions.length);
  const test=()=>{const correct=norm(input)===norm(active.phrase);setOutcome(correct?'right':'again');update(p=>({...p,quizResults:{...p.quizResults,[`${lesson.week}.${index}`]:correct?1:0}}));if(correct)onCue?.('bloom');};
- const chooseMeaning=(i:number)=>{if(left===null)return;if(left===i){setMatched(m=>m.includes(i)?m:[...m,i]);onCue?.('bloom')}setLeft(null);};
+ const chooseMeaning=(i:number)=>{if(left===null)return;if(left===i){
+   const nextSet=[...new Set([...matched,i])];setMatched(nextSet);setMatchFeedback('Matched! Find another expression.');
+   if(nextSet.length===expressions.length){update(p=>({...p,quizResults:{...p.quizResults,[lesson.week+'.match']:1}}));setMatchFeedback('All pairs matched. Your village garden has grown!');}
+   onCue?.('bloom');
+  }else setMatchFeedback('These do not match yet. Try another definition.');
+  setLeft(null);
+ };
  return <div className="activity-stack">
   <TaskIntro eyebrow="THE WORD GARDEN" title="Grow your expression garden">Retrieval practice builds stronger memory than rereading. Look, try to recall, reveal, and use each expression in a sentence of your own.</TaskIntro>
   <div className="flash-layout">
@@ -40,7 +49,7 @@ export function WordGarden({lesson,progress,note,rateCard,update,onCue}:LProps){
       <h3>{active.phrase}</h3>
       <div className={revealed?'flash-meaning visible':'flash-meaning'}>{revealed?active.meaning:'Think of a meaning before you reveal it.'}</div>
       <div className="inline-actions"><button className="button light" onClick={()=>setRevealed(v=>!v)}><Eye size={16}/>{revealed?'Hide':'Reveal'} meaning</button><button className="button dark" onClick={next}>Next word <ArrowRight size={16}/></button></div>
-      <div className="flash-dots">{expressions.map((_,i)=><button key={i} aria-label={`Expression ${i+1}`} className={i===index?'active':''} onClick={()=>{setIndex(i);setRevealed(false);setOutcome(null);setInput('')}}/>)}</div>
+      <div className="flash-dots">{expressions.map((_,i)=><button key={i} aria-label={`Expression ${i+1}`} className={i===index?'active':''} onClick={()=>choose(i)}/>)}</div>
     </div>
     <div className="paper-panel practice-side">
      <span className="eyebrow">SAY IT YOUR WAY</span><Label>Your original example</Label>
@@ -60,14 +69,22 @@ export function WordGarden({lesson,progress,note,rateCard,update,onCue}:LProps){
      <div className="match-column">{expressions.map((e,i)=><button key={i} disabled={matched.includes(i)} className={left===i?'match-item selected':matched.includes(i)?'match-item matched':'match-item'} onClick={()=>setLeft(i)}>{e.phrase}</button>)}</div>
      <div className="match-column">{shuffled.map(i=><button key={i} disabled={matched.includes(i)} className={matched.includes(i)?'match-item matched':'match-item'} onClick={()=>chooseMeaning(i)}>{expressions[i].meaning}</button>)}</div>
     </div>
+    {matchFeedback&&<p role="status" className={matched.length===expressions.length?'feedback success':'micro'}>{matchFeedback}</p>}
     {matched.length===expressions.length&&<div className="feedback success"><Sparkles size={17}/> You matched all the expressions. Use two of them in your next speaking answer.</div>}
   </div>
   <div className="paper-panel"><span className="eyebrow">SPEAK WITH PRECISION</span><h3>Grammar & pronunciation</h3><p>{lesson.grammar}</p><p className="muted">{lesson.pronunciation}</p><button className="button light" onClick={()=>{if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(active.phrase);u.lang='en-US';u.rate=.85;speechSynthesis.speak(u)}}}><Volume2 size={17}/> Listen to browser pronunciation</button><p className="micro">Available voices depend on your browser and device.</p></div>
  </div>;
 }
-export function StoryCottage({lesson,topics,topic,select,progress,topicNote,onCue}:{lesson:Lesson;topics:Topic[];topic:Topic;select:(id:string)=>void;progress:Progress;topicNote:(key:string,value:string)=>void;onCue?:(name:'turn')=>void}){
- const [order,setOrder]=useState([0,1,2,3]);
- const shift=(at:number,to:number)=>{if(to<0||to>=order.length)return;setOrder(o=>{const next=[...o];[next[at],next[to]]=[next[to],next[at]];return next});onCue?.('turn')};
+export function StoryCottage({lesson,topics,topic,select,progress,topicNote}:{lesson:Lesson;topics:Topic[];topic:Topic;select:(id:string)=>void;progress:Progress;topicNote:(key:string,value:string)=>void}){
+ const orderKey=topic.id+'.storyOrder';
+ const order=useMemo(()=>{
+   try{
+     const saved=JSON.parse(progress.topicNotes[orderKey]||'null');
+     if(Array.isArray(saved)&&saved.length===4&&saved.every(Number.isInteger)&&new Set(saved).size===4&&saved.every(x=>x>=0&&x<=3))return saved as number[];
+   }catch{ /* Invalid saved ordering uses the sensible teaching sequence. */ }
+   return [0,1,2,3];
+ },[progress.topicNotes,orderKey]);
+ const shift=(at:number,to:number)=>{if(to<0||to>=order.length)return;const next=[...order];[next[at],next[to]]=[next[to],next[at]];topicNote(orderKey,JSON.stringify(next));};
  return <div className="activity-stack">
   <TaskIntro eyebrow="THE STORY COTTAGE" title="Turn four clues into one story">Plan in keywords, then connect the ideas with details, a real example, and a reflection. You don't need to memorize a script.</TaskIntro>
   <div className="paper-panel"><Label>Choose a source cue card</Label><select className="text-field" aria-label="Choose speaking topic" value={topic.id} onChange={e=>select(e.target.value)}>{topics.map(t=><option value={t.id} key={t.id}>{t.title}</option>)}</select>

@@ -1,4 +1,5 @@
-import { readFileSync,writeFileSync } from 'node:fs';
+import { readFileSync,writeFileSync,readdirSync } from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 
 const root=path.resolve(import.meta.dirname,'..');
@@ -15,5 +16,17 @@ const script=path.join(dist,'sw.js');
 const original=readFileSync(script,'utf8');
 const marker='const GENERATED_ASSETS=[];';
 if(!original.includes(marker))throw Error('Offline cache manifest insertion point disappeared.');
-writeFileSync(script,original.replace(marker,'const GENERATED_ASSETS='+JSON.stringify([...assets])+';'));
-console.log('Prepared offline cache for '+assets.size+' compiled assets.');
+const cacheMarker="const CACHE='speaklab-village-2026-11-20';";
+if(!original.includes(cacheMarker))throw Error('Offline cache version marker disappeared.');
+const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>{
+  const absolute=path.join(directory,entry.name);
+  return entry.isDirectory()?walk(absolute):[absolute];
+});
+const fingerprint=createHash('sha256');
+for(const file of walk(dist).filter(file=>file!==script).sort()){
+  fingerprint.update(path.relative(dist,file).replaceAll('\\','/'));
+  fingerprint.update(readFileSync(file));
+}
+const version='speaklab-village-'+fingerprint.digest('hex').slice(0,12);
+writeFileSync(script,original.replace(marker,'const GENERATED_ASSETS='+JSON.stringify([...assets])+';').replace(cacheMarker,"const CACHE='"+version+"';"));
+console.log('Prepared offline cache '+version+' for '+assets.size+' compiled assets.');

@@ -68,6 +68,11 @@ p{line-height:1.65}small{font-size:.8rem}
 .cloud-one{top:15%;left:12%;transform:rotate(-7deg)}.cloud-two{top:25%;right:7%;width:100px}
 .world-sun{position:absolute;right:20%;top:12%;width:76px;height:76px;border-radius:50%;background:#f3dfa6;filter:blur(2px);box-shadow:0 0 65px 45px rgba(252,232,164,.4)}
 .world-attribution{position:absolute;z-index:5;top:20px;left:22px;display:flex;align-items:center;gap:7px;font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;font-weight:800;color:#56776b;background:rgba(255,255,252,.73);padding:10px 14px;border-radius:999px;backdrop-filter:blur(12px)}
+.world-word-picker{position:absolute;z-index:7;bottom:68px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:999px;background:rgba(255,253,238,.91);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 25px rgba(56,92,75,.1);backdrop-filter:blur(16px);white-space:nowrap}
+.world-word-picker>span{color:#5c8873;font-size:.65rem;font-weight:900;letter-spacing:.04em;margin:0 7px}
+.world-word-picker button{width:29px;height:29px;border:1px solid #d4e3cf;background:#e9f2e7;color:#52785e;border-radius:50%;font-size:.74rem;font-weight:900;transition:transform .18s var(--ease),background .18s}
+.world-word-picker button:hover{transform:translateY(-3px)}
+.world-word-picker button[aria-pressed=true]{background:#e0ae65;border-color:#c68f47;color:#fffefa;box-shadow:0 0 0 3px rgba(243,217,155,.45)}
 .live-dot{width:7px;height:7px;border-radius:50%;background:#5aa77b;box-shadow:0 0 0 4px rgba(116,176,123,.19)}
 .world-location-labels{position:absolute;z-index:6;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:7px;width:calc(100% - 25px);pointer-events:none}
 .world-tag{pointer-events:auto;display:flex;align-items:center;gap:5px;justify-content:center;font-size:clamp(.65rem,.8vw,.78rem);white-space:nowrap;background:rgba(255,252,245,.84);border:1px solid rgba(255,255,255,.86);border-radius:99px;padding:9px 10px;color:#456861;font-weight:800;backdrop-filter:blur(14px);box-shadow:0 6px 14px rgba(89,113,106,.07);transition:transform .2s var(--ease),background .2s}
@@ -346,6 +351,9 @@ textarea.text-field{resize:vertical;min-height:76px;line-height:1.6}
  .world-location-labels{display:grid;grid-template-columns:1fr 1fr;gap:5px;bottom:8px;padding:0 8px;max-width:350px}
  .world-tag{padding:6px 7px;font-size:.7rem;justify-content:flex-start}
  .world-attribution{top:10px;left:10px;font-size:.55rem;padding:8px 11px}
+ .world-word-picker{bottom:73px;gap:4px;padding:6px 7px}
+ .world-word-picker>span{font-size:.57rem;margin:0 4px}
+ .world-word-picker button{width:27px;height:27px}
  .world-hero.lesson{padding:20px 17px}
  .world-hero.lesson .world-stage{height:275px;min-height:275px}
  .world-chapter h1{font-size:2.2rem;margin:9px 0}
