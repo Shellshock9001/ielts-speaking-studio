@@ -1,0 +1,13 @@
+{
+  "name":"SpeakLab Village — Your English adventure",
+  "short_name":"SpeakLab Village",
+  "id":"/ielts-speaking-studio/",
+  "start_url":"/ielts-speaking-studio/#village",
+  "scope":"/ielts-speaking-studio/",
+  "display":"standalone",
+  "background_color":"#f8f6ed",
+  "theme_color":"#f8f6ed",
+  "description":"Free original IELTS Speaking world with self-paced interactive lessons and local progress.",
+  "icons":[{"src":"/ielts-speaking-studio/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}
+

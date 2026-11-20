@@ -1,36 +1,40 @@
-# SpeakLab — Free IELTS Speaking Studio
+# SpeakLab Village — Your English Adventure
 
-A free, fully static and interactive IELTS Speaking study resource built from the supplied 12-week instructor curriculum and its 44-topic question bank. Designed for GitHub Pages with **no server, no database and no runtime service account**.
+**Free, independent, original 3D IELTS Speaking learning world.**
 
-## Features
+Live: https://shellshock9001.github.io/ielts-speaking-studio/
 
-- 11 thematic lessons and a Week 12 mock assessment
-- All **44 original speaking topics**, **178 Part 2 cue-card prompts**, **132 Part 3 discussion questions**
-- Original visual prompt pack (six photo scenes), group discussion prompts
-- Vocabulary flashcards with pronunciation via built-in browser speech synthesis
-- Contextual fill-in-the-blank exercises
-- Guided cue-card planning and model response reveal
-- Part 2 preparation and speaking timers (60s / 120s)
-- Microphone recording with local playback and download (browser-dependent)
-- Part 3 answer notes and debate planning
-- Spaced recall schedule for 55 expressions
-- Week completion, topic progress, mock interview score history
-- JSON export/import for moving browser progress between devices
+Built with React 19, TypeScript, Vite, React Three Fiber and Three.js. Four interactive locations lead directly to educational work: Word Garden (retrieval practice and meaning matching), Story Cottage (Part 2 planning and sequencing), Speaking Dock (timed response and recording), and Debate Bridge (Part 3 reasoning).
 
-## Data and privacy
+The original woodland characters, geometry and sounds were authored for this project. No imagery or audio is copied from existing games.
 
-All learner notes and assessment results use browser `localStorage` on the device. No user accounts, cross-device synchronization, teacher portal, cloud database or auto-scoring. Microphone recordings are held temporarily in browser memory for download and are **not uploaded nor automatically persisted**. Students should download recordings and export progress regularly. Clearing browser data may remove progress.
+## Curriculum and exercises
 
-## Hosting
+The verified course bank contains 44 unique original Part 2 topics, 178 cue points and 132 Part 3 discussion questions. The 12-week curriculum includes 11 thematic lesson units and a final mock speaking assessment, visual observation tasks, matching, phrase gap fills, spaced repetition, story sequencing, speaking timers, private microphone recordings, and scored practice notes.
 
-Publish from the repository's `main` branch, `/ (root)` using GitHub Pages. No build, Node installation or external services needed. The `.nojekyll` file disables Jekyll processing. Front-end assets are relative to the repository path.
+Speaking scores record teacher or learner observations against the four IELTS Speaking criteria. The site does not calculate an official IELTS band and is not associated with IELTS test owners.
 
-Local preview: `python -m http.server 8080`, then visit `http://localhost:8080`.
+## Free hosting, privacy and China access
 
-## Educational integrity
+GitHub Pages serves the site with no paid API, account database, Supabase or third-party CDN. Every script, photo, CSS and audio file is bundled locally. Student notes, assessments and progress remain in browser localStorage; export/import JSON to move them. Recordings must be downloaded to keep them; they are not transmitted. Clear site data and you may lose progress.
 
-This is an **independent study tool**, not an official IELTS product. The practice-scoring UI tracks teacher or learner assessments using the four IELTS Speaking criteria but **does not calculate or guarantee an official band**. Consult current official IELTS band descriptors for formal evaluation.
+After one successful visit, a service worker can cache learning content for subsequent offline study. It cannot fix inaccessible first-time requests.
 
-## Source
+**Mainland China is not guaranteed**: independent GreatFire measurements show github.io reachability varying between blocked, available and intermittent subdomains. Students should check the exact site on Chinese networks. Separate China-reachable hosting may be needed; bundling and caching avoid known external Google/CDN dependencies.
 
-The lesson structure and question data were transcribed from the user-provided 52-page *English Speaking Masterclass — Complete Curriculum and Question Bank*. The six illustration photos were generated for this project. External site font requests are optional; system fonts provide a working fallback.
+## Development and deployment
+
+- Run: npm ci; npm run dev
+- Development URL: http://127.0.0.1:5174/ielts-speaking-studio/
+- Tests: npm test
+- Production build: npm run build
+- Browser smoke test: node scripts/site-smoke.cjs (requires a compatible Chromium/Edge browser and Playwright Core)
+- GitHub Actions builds the public dist directory on main and deploys via GitHub Pages.
+
+The app uses hash navigation so deep links remain on the one static HTML entry point.
+
+## Original sound design
+
+Four separate authored, multi-layer stereo cues appear in audio-sources and public/audio: arrival, bloom, turn, celebrate. Scores were constructed with Vision sonic design, with wood/modal, FM and botanical air performance roles instead of generic samples. scripts/master_audio.py adjusts playback levels without changing source scores. Sound is opt-in and pauses while the microphone is recording. The render pipeline passed signal checks; human listening approval on actual devices remains outstanding.
+
+Six original visual prompt photos were generated specifically for this project.
