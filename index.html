@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1021" />
+  <meta name="description" content="SpeakLab — a free, interactive IELTS Speaking studio with guided lessons, practice questions, timed speaking, self-assessments, and progress tracking." />
+  <title>SpeakLab — Interactive IELTS Speaking Studio</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app" class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="#home" aria-label="SpeakLab home"><span class="brand-symbol">✳</span><span>Speak<span class="brand-accent">Lab</span><small>IELTS SPEAKING STUDIO</small></span></a>
+    <div class="sidebar-group">LEARNING SPACE</div>
+    <nav id="primaryNav">
+      <button type="button" class="nav-item active" data-route="home"><span class="nav-icon">▦</span>Overview</button>
+      <button type="button" class="nav-item" data-route="lessons"><span class="nav-icon">◫</span>My lessons</button>
+      <button type="button" class="nav-item" data-route="bank"><span class="nav-icon">▤</span>Topic library</button>
+      <button type="button" class="nav-item" data-route="review"><span class="nav-icon">✧</span>Recall cards</button>
+      <button type="button" class="nav-item" data-route="assessment"><span class="nav-icon">◎</span>Mock interview</button>
+      <button type="button" class="nav-item" data-route="progress"><span class="nav-icon">↗</span>My progress</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="aside-tip"><span class="tip-glyph">✦</span><b>One small step daily.</b><p>Practice • Reflect • Repeat</p></div>
+      <button class="settings-button" type="button" data-route="settings">⚙ &nbsp; Settings & data</button>
+      <div class="sidebar-copyright">A free independent IELTS study companion</div>
+    </div>
+  </aside>
+  <div class="main-column">
+    <header class="topbar"><button class="mobile-logo" data-route="home"><span class="brand-symbol">✳</span> SpeakLab</button><div id="breadcrumbs" class="breadcrumbs">YOUR LEARNING SPACE <span> / </span> OVERVIEW</div><div class="top-actions"><div class="tiny-tag">FREE LEARNING STUDIO</div><span class="avatar" aria-label="Learner profile">SL</span></div></header>
+    <main id="main" tabindex="-1" aria-live="polite"></main>
+    <footer class="footer">Independent IELTS practice resource · Not affiliated with IELTS test owners · Progress stays in this browser unless exported.</footer>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-route="home">Home</button><button data-route="lessons">Lessons</button><button data-route="bank">Topics</button><button data-route="assessment">Mock</button><button data-route="progress">Progress</button></nav>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
