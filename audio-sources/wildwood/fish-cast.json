@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.16,
+  "gain": 0.74,
+  "seed": 81202,
+  "layers": [
+    {
+      "id": "fish-cast/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.9279999999999999,
+      "gain": 0.075,
+      "pan": -0.28,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.828,
+          0.68
+        ],
+        [
+          0.9279999999999999,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 159.5,
+          "decay": 0.29,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 548.68,
+          "decay": 0.3828,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 1055.89,
+          "decay": 0.16240000000000002,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1646.04,
+          "decay": 0.0928,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "fish-cast/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0928,
+      "duration": 0.8351999999999999,
+      "gain": 0.056,
+      "pan": 0.28,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.5451999999999999,
+          0.68
+        ],
+        [
+          0.8351999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          319
+        ],
+        [
+          0.8351999999999999,
+          398.75
+        ]
+      ],
+      "ratio": 2.64,
+      "index": [
+        [
+          0,
+          0.442
+        ],
+        [
+          0.8351999999999999,
+          0.078
+        ]
+      ]
+    },
+    {
+      "id": "fish-cast/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.02784,
+      "duration": 0.8467999999999999,
+      "gain": 0.012,
+      "pan": -0.22400000000000003,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.6967999999999999,
+          0.68
+        ],
+        [
+          0.8467999999999999,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.8467999999999999,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "fish-cast/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.348,
+      "duration": 0.7192,
+      "gain": 0.027,
+      "pan": 0.65,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.474672,
+          0.68
+        ],
+        [
+          0.7192,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          398.75
+        ],
+        [
+          0.7192,
+          472.12
+        ]
+      ],
+      "ratio": 3.168,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.7192,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

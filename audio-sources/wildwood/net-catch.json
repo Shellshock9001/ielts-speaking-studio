@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.1,
+  "gain": 0.74,
+  "seed": 72165,
+  "layers": [
+    {
+      "id": "net-catch/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.8800000000000001,
+      "gain": 0.075,
+      "pan": 0.33,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.7800000000000001,
+          0.68
+        ],
+        [
+          0.8800000000000001,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 309,
+          "decay": 0.275,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 1062.96,
+          "decay": 0.36300000000000004,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 2045.58,
+          "decay": 0.15400000000000003,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 3188.88,
+          "decay": 0.08800000000000001,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "net-catch/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.08800000000000001,
+      "duration": 0.792,
+      "gain": 0.056,
+      "pan": -0.33,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.502,
+          0.68
+        ],
+        [
+          0.792,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          618
+        ],
+        [
+          0.792,
+          871.38
+        ]
+      ],
+      "ratio": 2.83,
+      "index": [
+        [
+          0,
+          0.425
+        ],
+        [
+          0.792,
+          0.075
+        ]
+      ]
+    },
+    {
+      "id": "net-catch/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.026400000000000003,
+      "duration": 0.803,
+      "gain": 0.012,
+      "pan": 0.264,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.653,
+          0.68
+        ],
+        [
+          0.803,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.803,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "net-catch/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.33,
+      "duration": 0.682,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.45012,
+          0.68
+        ],
+        [
+          0.682,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          927
+        ],
+        [
+          0.682,
+          1186.56
+        ]
+      ],
+      "ratio": 3.396,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.682,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

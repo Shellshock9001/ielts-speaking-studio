@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.57,
+  "gain": 0.74,
+  "seed": 32144,
+  "layers": [
+    {
+      "id": "page-turn/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.45599999999999996,
+      "gain": 0.075,
+      "pan": 0.21,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.356,
+          0.68
+        ],
+        [
+          0.45599999999999996,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 147.5,
+          "decay": 0.1425,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 507.4,
+          "decay": 0.1881,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 976.45,
+          "decay": 0.0798,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1522.2,
+          "decay": 0.045599999999999995,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "page-turn/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.045599999999999995,
+      "duration": 0.41039999999999993,
+      "gain": 0.056,
+      "pan": -0.21,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.22571999999999995,
+          0.68
+        ],
+        [
+          0.41039999999999993,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          295
+        ],
+        [
+          0.41039999999999993,
+          359.9
+        ]
+      ],
+      "ratio": 2.34,
+      "index": [
+        [
+          0,
+          0.47600000000000003
+        ],
+        [
+          0.41039999999999993,
+          0.084
+        ]
+      ]
+    },
+    {
+      "id": "page-turn/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.01368,
+      "duration": 0.41609999999999997,
+      "gain": 0.012,
+      "pan": 0.168,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.2661,
+          0.68
+        ],
+        [
+          0.41609999999999997,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.41609999999999997,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "page-turn/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.17099999999999999,
+      "duration": 0.3534,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.23324399999999998,
+          0.68
+        ],
+        [
+          0.3534,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          442.5
+        ],
+        [
+          0.3534,
+          566.4
+        ]
+      ],
+      "ratio": 2.808,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.3534,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

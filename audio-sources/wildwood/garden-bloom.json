@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.9,
+  "gain": 0.74,
+  "seed": 79911,
+  "layers": [
+    {
+      "id": "garden-bloom/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 1.52,
+      "gain": 0.075,
+      "pan": 0.42,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          1.42,
+          0.68
+        ],
+        [
+          1.52,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 348.5,
+          "decay": 0.475,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 1198.84,
+          "decay": 0.627,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 2307.07,
+          "decay": 0.266,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 3596.52,
+          "decay": 0.152,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "garden-bloom/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.152,
+      "duration": 1.3679999999999999,
+      "gain": 0.056,
+      "pan": -0.42,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          1.0779999999999998,
+          0.68
+        ],
+        [
+          1.3679999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          697
+        ],
+        [
+          1.3679999999999999,
+          961.8599999999999
+        ]
+      ],
+      "ratio": 3.2,
+      "index": [
+        [
+          0,
+          0.459
+        ],
+        [
+          1.3679999999999999,
+          0.081
+        ]
+      ]
+    },
+    {
+      "id": "garden-bloom/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.0456,
+      "duration": 1.387,
+      "gain": 0.012,
+      "pan": 0.336,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          1.237,
+          0.68
+        ],
+        [
+          1.387,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          1.387,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "garden-bloom/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.57,
+      "duration": 1.178,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.77748,
+          0.68
+        ],
+        [
+          1.178,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          1045.5
+        ],
+        [
+          1.178,
+          1338.24
+        ]
+      ],
+      "ratio": 3.84,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          1.178,
+          0.08
+        ]
+      ]
+    },
+    {
+      "id": "garden-bloom/floating-tail",
+      "role": "Slow spaced high harmony and stereo decay",
+      "kind": "modal",
+      "start": 0.988,
+      "duration": 0.76,
+      "gain": 0.017,
+      "pan": 0.42,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.56,
+          0.68
+        ],
+        [
+          0.76,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 697,
+          "decay": 0.475,
+          "amplitude": 0.42
+        },
+        {
+          "frequency": 2397.68,
+          "decay": 0.627,
+          "amplitude": 0.175
+        },
+        {
+          "frequency": 4614.14,
+          "decay": 0.266,
+          "amplitude": 0.055999999999999994
+        },
+        {
+          "frequency": 7193.04,
+          "decay": 0.152,
+          "amplitude": 0.0315
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+/* Vision-authored 3D adventure control language.
+ * Tactile physical keys, wood-and-ivory tools, meaningful action context.
+ * Each visible control has a bound gameplay operation, never decorative. */
+.ww-world-prompt{display:none}
+.ww-minimap{left:auto;right:clamp(.6rem,2vw,1.4rem);bottom:auto;top:clamp(10.8rem,24vh,14rem);opacity:.73;pointer-events:none}
+.ww-world-controls{bottom:max(1rem,env(safe-area-inset-bottom));left:max(.75rem,env(safe-area-inset-left));z-index:8}
+.ww-touch-controls{align-items:end}
+.ww-dpad{width:clamp(7.6rem,13vw,10rem);height:clamp(7.6rem,13vw,10rem);display:grid;
+ grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.2rem;
+ border-radius:1.5rem;padding:.3rem;pointer-events:auto;
+ background:radial-gradient(circle at 50% 50%,rgba(255,247,216,.7),rgba(235,232,203,.52));
+ border:1px solid rgba(255,255,243,.75);box-shadow:0 1rem 2.4rem rgba(51,87,68,.17),inset 0 1px rgba(255,255,255,.8);
+ backdrop-filter:blur(15px);touch-action:none;user-select:none}
+.ww-dpad:before{content:'✥';grid-column:2;grid-row:2;place-self:center;color:#9ab3a0;font-size:1.5rem}
+.ww-dpad button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:0;
+ border:1px solid #d9e3d4;border-bottom:3px solid #b2c8b3;
+ border-radius:.75rem;background:linear-gradient(150deg,#fffbed,#e3ebdb);color:#417967;box-shadow:0 .22rem .3rem #6c8b6440;touch-action:none}
+.ww-dpad button:active{background:#c6e3c7;transform:translateY(2px);box-shadow:none;border-bottom-width:1px}
+.ww-dpad button span{font-size:clamp(.94rem,1.45vw,1.28rem);line-height:1}
+.ww-dpad button kbd{font-size:.62rem;font-weight:900;line-height:1.2;color:#79958a}
+.ww-dpad-up{grid-row:1;grid-column:2}.ww-dpad-left{grid-row:2;grid-column:1}
+.ww-dpad-down{grid-row:3;grid-column:2}.ww-dpad-right{grid-row:2;grid-column:3}
+.ww-stick{display:none}
+.ww-toolbelt{position:absolute;z-index:9;bottom:max(.8rem,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+ display:flex;align-items:stretch;gap:.32rem;padding:.36rem .46rem;border-radius:1.3rem;
+ border:1px solid rgba(255,250,228,.85);background:linear-gradient(145deg,rgba(250,243,220,.93),rgba(222,234,215,.88));
+ box-shadow:0 1rem 2.6rem #315f4842,inset 0 1px #fffef4;backdrop-filter:blur(19px);max-width:calc(100% - 2rem)}
+.ww-tool-slot{position:relative;min-width:0;width:clamp(3.5rem,5vw,4.9rem);height:clamp(4.35rem,5.4vw,5.45rem);
+ border:1px solid #d8ddc8;border-bottom:3px solid #b8c8b1;background:#f9f7e9;border-radius:.89rem;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;
+ color:#4f8374;transition:transform .17s,border-color .17s,background .17s,box-shadow .17s}
+.ww-tool-slot:hover:not(:disabled){transform:translateY(-5px);box-shadow:0 .3rem .8rem #729c8660}
+.ww-tool-slot.selected{background:linear-gradient(155deg,#fff4d6,#e2e9cb);border-color:#dbb46c;border-bottom-color:#b48e56;
+ box-shadow:inset 0 0 0 2px #f8e6b6,0 0 0 2px #eed8a6;color:#537a59;transform:translateY(-4px)}
+.ww-tool-slot>kbd{position:absolute;right:.24rem;top:.18rem;font-size:.62rem;line-height:1;border-radius:.3rem;
+ padding:.18rem .29rem;background:#f1e9d3;border:1px solid #d4d0b9;color:#927e63;font-weight:900}
+.ww-tool-illustration{display:grid;place-items:center;width:2.6rem;height:2.5rem;filter:drop-shadow(0 .12rem .11rem #9a9f8560)}
+.ww-tool-slot small{font-size:clamp(.53rem,.75vw,.68rem);line-height:1.05;white-space:nowrap;font-weight:900}
+.ww-adventure-status{position:absolute;z-index:7;top:clamp(5rem,10.5vh,6.5rem);right:max(.8rem,env(safe-area-inset-right));
+ display:flex;flex-direction:column;gap:.45rem;align-items:flex-end;pointer-events:none;width:min(32%,17rem)}
+.ww-adventure-status>*{pointer-events:auto}
+.ww-level{display:flex;gap:.45rem;align-items:center;padding:.52rem .75rem;
+ background:rgba(255,251,235,.91);border-radius:100vmax;color:#4d8169;
+ box-shadow:0 .4rem 1.3rem #52715b24;font-size:.75rem;backdrop-filter:blur(12px)}
+.ww-level-star{color:#c6a06d;font-size:1.14rem}
+.ww-level>strong{white-space:nowrap}
+.ww-level>span:last-child{color:#9aaa91;font-size:.67rem;font-variant-numeric:tabular-nums}
+.ww-quest-ribbon{display:flex;align-items:center;gap:.58rem;max-width:100%;min-height:3rem;
+ border:1px solid rgba(255,255,241,.9);border-radius:1rem;padding:.65rem .7rem;
+ background:rgba(249,245,224,.92);box-shadow:0 .7rem 1.8rem #526f5530;color:#57806e;text-align:left;
+ backdrop-filter:blur(15px);transition:transform .16s,background .16s}
+.ww-quest-ribbon:hover{transform:translateY(-2px);background:#fff8e4}
+.ww-quest-ribbon span{display:flex;flex:1;min-width:0;flex-direction:column;gap:.1rem}
+.ww-quest-ribbon small{font-size:.56rem;letter-spacing:.11em;font-weight:900;color:#a2b08a}
+.ww-quest-ribbon strong{font-size:.78rem;line-height:1.2}
+.ww-quest-ribbon em{font-size:.68rem;font-style:normal;white-space:nowrap;font-weight:900;color:#b49462}
+.ww-quest-ribbon kbd{border:1px solid #d7dfc9;border-bottom:2px solid #b6c8b6;background:#f2f5e7;border-radius:.42rem;
+ padding:.2rem .33rem;font-size:.7rem}
+.ww-action-hud{position:absolute;z-index:8;right:max(.7rem,env(safe-area-inset-right));
+ bottom:clamp(7rem,14vh,10rem);display:flex;flex-direction:column;gap:.5rem;width:clamp(13rem,19vw,18rem);
+ max-width:38%;pointer-events:none}
+.ww-action-hud>*{pointer-events:auto}
+.ww-action-context{display:flex;align-items:center;gap:.55rem;background:rgba(255,249,227,.89);
+ border:1px solid rgba(255,255,241,.8);border-radius:1rem;padding:.65rem .7rem;
+ box-shadow:0 .5rem 1.4rem #46664e36;backdrop-filter:blur(14px)}
+.ww-action-icon{display:grid;place-items:center;flex:0 0 2rem;height:2rem;background:#dcead6;color:#719878;border-radius:.72rem}
+.ww-action-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:.15rem}
+.ww-action-copy small{font-size:.58rem;letter-spacing:.13em;font-weight:900;color:#a7b08b}
+.ww-action-copy strong{color:#4e765f;font-size:.78rem;line-height:1.15}
+.ww-action-copy>span{font-size:.67rem;line-height:1.35;color:#899d84}
+.ww-stamina{display:flex;flex-direction:column;gap:.32rem;background:rgba(251,245,220,.91);
+ border:1px solid #fff8e3;border-radius:.83rem;padding:.55rem .7rem;backdrop-filter:blur(13px);
+ box-shadow:0 .4rem 1.2rem #41614a23}
+.ww-stamina>div:first-child{display:flex;align-items:center;gap:.35rem;color:#5b9577;font-size:.58rem;letter-spacing:.08em}
+.ww-stamina>div:first-child span{margin-left:auto;color:#8caa91;font-size:.55rem}
+.ww-stamina [role=progressbar]{width:100%;height:.52rem;overflow:hidden;border-radius:100vmax;
+ background:#d4e3cf;box-shadow:inset 0 1px 2px #77937753}
+.ww-stamina i{display:block;height:100%;background:linear-gradient(90deg,#94c8a4,#4c9976);
+ border-radius:100vmax;transition:width .13s ease}
+.ww-action-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.34rem}
+.ww-game-action{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+ min-width:0;min-height:3.7rem;padding:.34rem .2rem;border-radius:.82rem;
+ background:linear-gradient(155deg,#fffae8,#e2ecd9);border:1px solid #fef9df;border-bottom:3px solid #b2c9b3;
+ color:#547f67;box-shadow:0 .32rem .7rem #537a5c3d;transition:transform .12s,background .12s}
+.ww-game-action.primary{background:linear-gradient(145deg,#f7e4b8,#ecbe91);color:#7b6050;border-bottom-color:#ba9778}
+.ww-game-action:active:not(:disabled){transform:translateY(2px);border-bottom-width:1px;box-shadow:none}
+.ww-game-action>span{font-size:.65rem;font-weight:900;line-height:1}
+.ww-game-action kbd{font-size:.57rem;line-height:1;border:1px solid #cbd8c4;border-radius:.35rem;padding:.15rem .28rem;
+ color:#7c9d82;background:#fffced}
+.ww-touch-utility,.ww-touch-motion{min-height:3rem;background:rgba(235,244,228,.94)}
+.ww-game-action:disabled{opacity:.4;filter:grayscale(.36)}
+.ww-app.ww-has-panel .ww-action-hud,.ww-app.ww-has-panel .ww-toolbelt{display:none}
+.ww-app.ww-has-panel:not([data-panel=word]):not([data-panel=story]):not([data-panel=debate]) .ww-world-controls{display:none}
+.ww-bag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,6.2rem),1fr));gap:.58rem}
+.ww-bag-item{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:7rem;
+ background:linear-gradient(155deg,#fdf8e7,#ebf3e6);border:1px solid #e6e9db;border-radius:1.05rem;padding:.8rem}
+.ww-bag-sigil{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:.9rem;
+ background:#f6e0ba;color:#aa8670;font-size:1.5rem}
+.ww-bag-item strong{font-size:1.5rem;line-height:1.3;color:#518571;font-variant-numeric:tabular-nums}
+.ww-bag-item small{font-size:.7rem;text-align:center;line-height:1.25;color:#829a8a}
+.ww-crafting-card{background:linear-gradient(145deg,#f5edda,#eaf1dc);border:1px solid #dfdbc5;
+ border-radius:1.1rem;padding:1rem;display:flex;flex-direction:column;gap:.65rem}
+.ww-crafting-card>div{display:flex;align-items:center;gap:.9rem}
+.ww-craft-emblem{flex:0 0 3.5rem;width:3.5rem;height:3.5rem;display:grid;place-items:center;border-radius:1.1rem;
+ background:linear-gradient(135deg,#f1d4b8,#fff0d0);color:#c09b78}
+.ww-crafting-card h3{font-size:1.05rem;margin:.15rem 0 .35rem}
+.ww-crafting-card p{margin:0;font-size:.82rem;line-height:1.45;color:#829680}
+.ww-crafting-card small{display:block;margin-top:.42rem;color:#5f896c;font-size:.72rem}
+.ww-bag-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:.56rem}
+.ww-bag-tools button{min-height:8rem;border:1px solid #dbe7d7;background:#f8fbf2;border-radius:1rem;
+ display:flex;flex-direction:column;align-items:center;text-align:center;gap:.38rem;padding:.7rem;color:#4d856a}
+.ww-bag-tools button[aria-pressed=true]{border-color:#d7b677;background:#f9edcf}
+.ww-bag-tools strong{font-size:.87rem}
+.ww-bag-tools small{font-size:.72rem;line-height:1.35;color:#82978b}
+.ww-bag-tools kbd{color:#aa8c65;font-size:.69rem}
+.ww-daily-quests{display:flex;flex-direction:column;gap:.65rem}
+.ww-daily-quests article{display:flex;gap:.7rem;align-items:center;background:#f9fbf3;border:1px solid #dde8d7;
+ border-radius:1rem;padding:.9rem;min-width:0}
+.ww-quest-number{font-weight:900;color:#c5ac80;font-size:1.1rem}
+.ww-quest-details{flex:1;min-width:0}
+.ww-quest-details h3{font-size:1.05rem;line-height:1.2;margin:0;color:#426e5e}
+.ww-quest-details p{font-size:.81rem;line-height:1.45;color:#8ba089;margin:.3rem 0}
+.ww-quest-details small{font-size:.7rem;color:#6c9880}
+.ww-quest-progress{height:.49rem;border-radius:100vmax;background:#dce8d9;overflow:hidden;margin:.6rem 0 .3rem}
+.ww-quest-progress i{display:block;height:100%;background:linear-gradient(90deg,#9dcaa1,#59aa7b);border-radius:100vmax}
+.ww-daily-quests article.claimed{opacity:.72}
+.ww-daily-quests button{flex-shrink:0}
+.ww-album-entry{display:flex;align-items:center;gap:.8rem;padding:1rem;border-radius:1.1rem;
+ border:1px solid #dddfcc;background:linear-gradient(140deg,#fff5e0,#e9f4e5);color:#4b8166;text-align:left}
+.ww-album-entry>svg{flex-shrink:0;color:#bd9e71}
+.ww-album-entry>span:nth-child(2){display:flex;flex:1;flex-direction:column;gap:.3rem;min-width:0}
+.ww-album-entry strong{font-size:.96rem;line-height:1.25}
+.ww-album-entry small{font-size:.75rem;line-height:1.4;color:#8c9e8a}
+.ww-field-guide-cover{display:flex;gap:1rem;align-items:center;padding:1.25rem;
+ border:1px solid #e2e7d4;border-radius:1.35rem;background:linear-gradient(130deg,#f7ebcf,#e8f4e6)}
+.ww-field-guide-icon{width:4.5rem;aspect-ratio:1;flex-shrink:0;display:grid;place-items:center;color:#b99b74;
+ background:#fff4de;border:1px solid #f0dcbe;border-radius:1.2rem}
+.ww-field-guide-cover h3{font-size:1.45rem;letter-spacing:-.03em;line-height:1.1;margin:.45rem 0}
+.ww-field-guide-cover p{font-size:.85rem;line-height:1.5;color:#7a9485;margin:0}
+.ww-field-guide-meter{height:.64rem;overflow:hidden;background:#e3e9dc;border-radius:2rem}
+.ww-field-guide-meter i{display:block;height:100%;background:linear-gradient(90deg,#a6d0aa,#65a789);
+ border-radius:2rem;transition:width .2s ease}
+.ww-guide-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.ww-guide-tabs button{font-size:.75rem;min-height:2.6rem;padding:.55rem .7rem;background:#f3f8ef;color:#769682;
+ border:1px solid #dce9dd;border-radius:.77rem;font-weight:900}
+.ww-guide-tabs button[aria-pressed=true]{background:#477c67;color:#fff8e4;border-color:#5d9980}
+.ww-guide-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.65rem}
+.ww-guide-cards article{position:relative;display:flex;gap:.7rem;align-items:center;min-width:0;
+ padding:.85rem;border:1px solid #e3eadc;border-radius:1rem;background:#fbfdf6}
+.ww-guide-cards article.found{border-color:#d4d9b8;background:linear-gradient(120deg,#fff9e8,#f0f5e8)}
+.ww-guide-art{display:grid;place-items:center;flex-shrink:0;width:3rem;height:3rem;
+ background:#edf1e7;color:#a3b5a6;border-radius:.9rem}
+.ww-guide-cards .found .ww-guide-art{background:#f8e5c4;color:#a88362}
+.ww-guide-cards article>div{min-width:0;flex:1}
+.ww-guide-cards .ww-kicker{font-size:.56rem;letter-spacing:.07em}
+.ww-guide-cards h4{font-size:.81rem;line-height:1.2;margin:.3rem 0;color:#537566}
+.ww-guide-cards p{font-size:.67rem;line-height:1.4;margin:0;color:#91a093}
+.ww-guide-status{color:#c9d4c7;font-size:1.4rem}
+.ww-guide-cards .found .ww-guide-status{color:#caa368}
+.ww-2d-field{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.ww-2d-field button{border:1px solid #d9e4d4;background:#f8fbf1;color:#4c7965;padding:.65rem;
+ border-radius:.75rem;font-size:.78rem}
+.ww-2d-peer-card{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.ww-2d-peer-card button{min-height:2.6rem;border:1px solid #d6e3ce;border-radius:.8rem;background:#fff9e8;
+ color:#436d58;padding:.55rem .7rem;text-align:left}
+.ww-2d-peer-card button:last-child:not(:first-child){background:#e7f2e6;color:#658c74}
+.ww-app:has(.ww-2d-world) .ww-world-controls,.ww-app:has(.ww-2d-world) .ww-action-hud,
+.ww-app:has(.ww-2d-world) .ww-toolbelt{display:none}
+.ww-app:has(.ww-2d-world) .ww-region-title,.ww-app:has(.ww-2d-world) .ww-minimap{display:none}
+.ww-2d-world{padding-top:clamp(7rem,13vh,8.8rem);padding-bottom:3rem}
+.ww-2d-equipment{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8.5rem),1fr));gap:.45rem}
+.ww-2d-equipment button{display:flex;gap:.5rem;align-items:center;padding:.65rem .75rem;min-height:3rem;
+ border:1px solid #dbe7d2;background:#fff9e9;border-radius:.75rem;text-align:left;color:#4e7b66;font-size:.82rem}
+.ww-2d-equipment button[aria-pressed=true]{border-color:#d7ad76;background:#f6e8cb}
+.ww-2d-equipment strong{border-radius:.4rem;background:#e5eddb;padding:.25rem .4rem;font-size:.75rem}
+.ww-2d-utility{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+.ww-2d-utility button{flex:1;min-height:2.9rem;border:1px solid #cce0cd;border-radius:.8rem;
+ background:#e7f3e2;color:#56816d;padding:.6rem;font-weight:850}
+@media(hover:none) and (pointer:coarse){
+ .ww-stick{display:block}.ww-dpad{display:none}
+}
+@media(max-width:63.999rem){
+ .ww-adventure-status{top:clamp(4.8rem,9vh,5.5rem);width:min(37%,15rem)}
+ .ww-action-hud{width:clamp(12rem,26vw,17rem);max-width:34%;bottom:clamp(6.1rem,12vh,9rem)}
+ .ww-world-controls{bottom:max(1rem,env(safe-area-inset-bottom))}
+ .ww-toolbelt{bottom:max(.55rem,env(safe-area-inset-bottom))}
+}
+@media(max-width:44rem){
+ .ww-region-title{top:8rem;width:65%}
+ .ww-region-title h1{font-size:clamp(1.2rem,5vw,1.8rem)}
+ .ww-region-title p{display:none}
+ .ww-adventure-status{top:4.2rem;right:.55rem;width:54%;gap:.25rem}
+ .ww-level{padding:.3rem .55rem;font-size:.63rem}
+ .ww-level>span:last-child{font-size:.55rem}
+ .ww-quest-ribbon{min-height:2.45rem;padding:.42rem .53rem;gap:.3rem}
+ .ww-quest-ribbon strong{font-size:.69rem}
+ .ww-quest-ribbon small{font-size:.51rem}
+ .ww-quest-ribbon kbd{display:none}
+ .ww-minimap{display:none}
+ .ww-toolbelt{gap:.2rem;padding:.25rem .27rem;bottom:max(.4rem,env(safe-area-inset-bottom));border-radius:1rem}
+ .ww-tool-slot{width:clamp(3.3rem,15.5vw,3.9rem);height:3.65rem;border-radius:.7rem}
+ .ww-tool-slot>kbd{font-size:.52rem;padding:.13rem .22rem}
+ .ww-tool-slot .ww-tool-illustration{height:2rem;width:2rem}
+ .ww-tool-slot svg{width:1.3rem;height:1.3rem}
+ .ww-tool-slot small{font-size:.54rem}
+ .ww-world-controls{bottom:clamp(5.1rem,12vh,7rem);left:.45rem}
+ .ww-stick{min-width:5.1rem!important;min-height:5.1rem!important;width:clamp(5.2rem,26vw,6.5rem);height:clamp(5.2rem,26vw,6.5rem)}
+ .ww-dpad{width:6.4rem;height:6.4rem}
+ .ww-action-hud{max-width:none;width:min(48%,11rem);bottom:clamp(5.2rem,12vh,7.3rem);right:.4rem;gap:.3rem}
+ .ww-action-context{display:none}
+ .ww-stamina{padding:.3rem .5rem}
+ .ww-stamina>div:first-child{font-size:.52rem}
+ .ww-stamina [role=progressbar]{height:.34rem}
+ .ww-action-buttons{grid-template-columns:repeat(4,minmax(0,1fr));gap:.18rem}
+ .ww-game-action{border-radius:.54rem;padding:.2rem .04rem;min-height:2.7rem}
+ .ww-game-action svg{width:1rem;height:1rem}
+ .ww-game-action>span{font-size:.5rem}
+ .ww-game-action kbd{font-size:.48rem;padding:.1rem .12rem}
+ .ww-touch-utility,.ww-touch-motion{min-height:2.2rem}
+}
+@media(max-width:23rem){
+ .ww-level{display:none}
+ .ww-adventure-status{top:3.8rem;width:54%}
+ .ww-quest-ribbon{padding:.33rem .43rem}
+ .ww-quest-ribbon>svg{width:.85rem}
+ .ww-region-title{top:7.1rem;width:45%}
+ .ww-region-title h1{font-size:1.1rem}
+ .ww-tool-slot{width:2.92rem;height:3.42rem}
+ .ww-tool-slot small{font-size:.46rem}
+ .ww-toolbelt{max-width:calc(100% - .6rem)}
+ .ww-action-hud{width:51%;bottom:5.2rem}
+ .ww-action-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .ww-world-controls{bottom:5.2rem}
+ .ww-dpad{width:6rem;height:6rem}
+ .ww-stick{width:5.3rem;height:5.3rem;min-width:5.3rem!important;min-height:5.3rem!important}
+}
+@media(orientation:landscape) and (max-height:35rem){
+ .ww-toolbelt{left:48%;bottom:.25rem;transform:translateX(-50%) scale(.82);transform-origin:bottom center}
+ .ww-world-controls{bottom:4.9rem}
+ .ww-action-hud{right:.5rem;bottom:4.9rem;max-width:32%;width:12rem}
+ .ww-adventure-status{top:3.4rem;width:36%}
+ .ww-region-title{top:4rem}
+ .ww-action-context{display:none}
+}
+@media(min-width:64rem) and (min-height:36rem){
+ .ww-app.ww-has-panel .ww-world-controls{bottom:max(1rem,env(safe-area-inset-bottom))}
+}

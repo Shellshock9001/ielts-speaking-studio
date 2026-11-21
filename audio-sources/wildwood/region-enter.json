@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.26,
+  "gain": 0.74,
+  "seed": 33435,
+  "layers": [
+    {
+      "id": "region-enter/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 1.008,
+      "gain": 0.075,
+      "pan": -0.19,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.908,
+          0.68
+        ],
+        [
+          1.008,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 177,
+          "decay": 0.315,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 608.88,
+          "decay": 0.4158,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 1171.74,
+          "decay": 0.17640000000000003,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1826.64,
+          "decay": 0.1008,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "region-enter/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.1008,
+      "duration": 0.9072,
+      "gain": 0.056,
+      "pan": 0.19,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.6172,
+          0.68
+        ],
+        [
+          0.9072,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          354
+        ],
+        [
+          0.9072,
+          531
+        ]
+      ],
+      "ratio": 3.41,
+      "index": [
+        [
+          0,
+          0.34
+        ],
+        [
+          0.9072,
+          0.06
+        ]
+      ]
+    },
+    {
+      "id": "region-enter/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.03024,
+      "duration": 0.9198,
+      "gain": 0.012,
+      "pan": -0.15200000000000002,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.7697999999999999,
+          0.68
+        ],
+        [
+          0.9198,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.9198,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "region-enter/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.378,
+      "duration": 0.7812,
+      "gain": 0.027,
+      "pan": 0.65,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.515592,
+          0.68
+        ],
+        [
+          0.7812,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          531
+        ],
+        [
+          0.7812,
+          679.68
+        ]
+      ],
+      "ratio": 4.092,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.7812,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

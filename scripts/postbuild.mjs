@@ -23,6 +23,9 @@ const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=
   return entry.isDirectory()?walk(absolute):[absolute];
 });
 const fingerprint=createHash('sha256');
+// Service-worker behavior participates in the cache identity; an SW-only
+// fix must not keep the old release cache name.
+fingerprint.update(original);
 for(const file of walk(dist).filter(file=>file!==script).sort()){
   fingerprint.update(path.relative(dist,file).replaceAll('\\','/'));
   fingerprint.update(readFileSync(file));

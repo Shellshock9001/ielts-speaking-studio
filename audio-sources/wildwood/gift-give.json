@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.61,
+  "gain": 0.74,
+  "seed": 90239,
+  "layers": [
+    {
+      "id": "gift-give/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 1.2880000000000003,
+      "gain": 0.075,
+      "pan": 0.37,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          1.1880000000000002,
+          0.68
+        ],
+        [
+          1.2880000000000003,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 246,
+          "decay": 0.4025,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 846.24,
+          "decay": 0.5313000000000001,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 1628.52,
+          "decay": 0.22540000000000004,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 2538.7200000000003,
+          "decay": 0.1288,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "gift-give/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.1288,
+      "duration": 1.1592,
+      "gain": 0.056,
+      "pan": -0.37,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.8692,
+          0.68
+        ],
+        [
+          1.1592,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          492
+        ],
+        [
+          1.1592,
+          649.44
+        ]
+      ],
+      "ratio": 2.59,
+      "index": [
+        [
+          0,
+          0.357
+        ],
+        [
+          1.1592,
+          0.063
+        ]
+      ]
+    },
+    {
+      "id": "gift-give/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.03864,
+      "duration": 1.1753,
+      "gain": 0.012,
+      "pan": 0.296,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          1.0253,
+          0.68
+        ],
+        [
+          1.1753,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          1.1753,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "gift-give/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.483,
+      "duration": 0.9982000000000001,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.658812,
+          0.68
+        ],
+        [
+          0.9982000000000001,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          738
+        ],
+        [
+          0.9982000000000001,
+          944.64
+        ]
+      ],
+      "ratio": 3.1079999999999997,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.9982000000000001,
+          0.08
+        ]
+      ]
+    },
+    {
+      "id": "gift-give/floating-tail",
+      "role": "Slow spaced high harmony and stereo decay",
+      "kind": "modal",
+      "start": 0.8372,
+      "duration": 0.6440000000000001,
+      "gain": 0.017,
+      "pan": 0.37,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.4440000000000001,
+          0.68
+        ],
+        [
+          0.6440000000000001,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 492,
+          "decay": 0.4025,
+          "amplitude": 0.42
+        },
+        {
+          "frequency": 1692.48,
+          "decay": 0.5313000000000001,
+          "amplitude": 0.175
+        },
+        {
+          "frequency": 3257.04,
+          "decay": 0.22540000000000004,
+          "amplitude": 0.055999999999999994
+        },
+        {
+          "frequency": 5077.4400000000005,
+          "decay": 0.1288,
+          "amplitude": 0.0315
+        }
+      ]
+    }
+  ]
+}

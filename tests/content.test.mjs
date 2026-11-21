@@ -33,7 +33,7 @@ test('the 11 thematic lessons retain all 44 source topics exactly once',()=>{
 });
 test('the site imports no remote runtime scripts or remote font files',()=>{
   const index=readFileSync(path.join(root,'index.html'),'utf8');
-  const src=readFileSync(path.join(root,'src','styles.css'),'utf8');
+  const src=readFileSync(path.join(root,'src','world','world.css'),'utf8');
   assert.doesNotMatch(index,/https?:\/\//i);
   assert.doesNotMatch(src,/@import\s+url\(/i);
   assert.doesNotMatch(index,/(googleapis|gstatic|jsdelivr|unpkg|cloudflare)/i);

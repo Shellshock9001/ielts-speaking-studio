@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.91,
+  "gain": 0.74,
+  "seed": 45054,
+  "layers": [
+    {
+      "id": "classroom-door/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.7280000000000001,
+      "gain": 0.105,
+      "pan": 0.2,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.6280000000000001,
+          0.68
+        ],
+        [
+          0.7280000000000001,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 151,
+          "decay": 0.2275,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 386.56,
+          "decay": 0.3003,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 748.96,
+          "decay": 0.1274,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1455.64,
+          "decay": 0.0728,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "classroom-door/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0728,
+      "duration": 0.6552,
+      "gain": 0.056,
+      "pan": -0.2,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.3652,
+          0.68
+        ],
+        [
+          0.6552,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          302
+        ],
+        [
+          0.6552,
+          208.38
+        ]
+      ],
+      "ratio": 2.48,
+      "index": [
+        [
+          0,
+          0.323
+        ],
+        [
+          0.6552,
+          0.056999999999999995
+        ]
+      ]
+    },
+    {
+      "id": "classroom-door/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.021840000000000002,
+      "duration": 0.6643,
+      "gain": 0.018,
+      "pan": 0.16000000000000003,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.5143,
+          0.68
+        ],
+        [
+          0.6643,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          1750
+        ],
+        [
+          0.6643,
+          840
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "classroom-door/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.273,
+      "duration": 0.5642,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.37237200000000004,
+          0.68
+        ],
+        [
+          0.5642,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          453
+        ],
+        [
+          0.5642,
+          579.84
+        ]
+      ],
+      "ratio": 2.976,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.5642,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

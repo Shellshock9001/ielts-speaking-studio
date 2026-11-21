@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.46,
+  "gain": 0.74,
+  "seed": 64419,
+  "layers": [
+    {
+      "id": "hop-land/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.36800000000000005,
+      "gain": 0.075,
+      "pan": 0.2,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.268,
+          0.68
+        ],
+        [
+          0.36800000000000005,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 87.5,
+          "decay": 0.115,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 301,
+          "decay": 0.15180000000000002,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 579.25,
+          "decay": 0.06440000000000001,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 903,
+          "decay": 0.0368,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "hop-land/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0368,
+      "duration": 0.3312,
+      "gain": 0.056,
+      "pan": -0.2,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.18216,
+          0.68
+        ],
+        [
+          0.3312,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          175
+        ],
+        [
+          0.3312,
+          99.75000000000001
+        ]
+      ],
+      "ratio": 1.48,
+      "index": [
+        [
+          0,
+          0.425
+        ],
+        [
+          0.3312,
+          0.075
+        ]
+      ]
+    },
+    {
+      "id": "hop-land/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.011040000000000001,
+      "duration": 0.3358,
+      "gain": 0.012,
+      "pan": 0.16000000000000003,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.1858,
+          0.68
+        ],
+        [
+          0.3358,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.3358,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "hop-land/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.138,
+      "duration": 0.2852,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.188232,
+          0.68
+        ],
+        [
+          0.2852,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          262.5
+        ],
+        [
+          0.2852,
+          336
+        ]
+      ],
+      "ratio": 1.776,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.2852,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

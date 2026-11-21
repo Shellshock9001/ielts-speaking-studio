@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 1.18,
+  "gain": 0.74,
+  "seed": 76038,
+  "layers": [
+    {
+      "id": "dig-discover/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.944,
+      "gain": 0.075,
+      "pan": 0.3,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.844,
+          0.68
+        ],
+        [
+          0.944,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 209.5,
+          "decay": 0.295,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 720.68,
+          "decay": 0.3894,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 1386.89,
+          "decay": 0.1652,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 2162.04,
+          "decay": 0.0944,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "dig-discover/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0944,
+      "duration": 0.8495999999999999,
+      "gain": 0.056,
+      "pan": -0.3,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.5595999999999999,
+          0.68
+        ],
+        [
+          0.8495999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          419
+        ],
+        [
+          0.8495999999999999,
+          540.51
+        ]
+      ],
+      "ratio": 2.57,
+      "index": [
+        [
+          0,
+          0.408
+        ],
+        [
+          0.8495999999999999,
+          0.072
+        ]
+      ]
+    },
+    {
+      "id": "dig-discover/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.028319999999999998,
+      "duration": 0.8613999999999999,
+      "gain": 0.012,
+      "pan": 0.24,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.7113999999999999,
+          0.68
+        ],
+        [
+          0.8613999999999999,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.8613999999999999,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "dig-discover/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.354,
+      "duration": 0.7315999999999999,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.48285599999999995,
+          0.68
+        ],
+        [
+          0.7315999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          628.5
+        ],
+        [
+          0.7315999999999999,
+          804.48
+        ]
+      ],
+      "ratio": 3.0839999999999996,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.7315999999999999,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

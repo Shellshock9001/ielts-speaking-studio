@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.53,
+  "gain": 0.74,
+  "seed": 74747,
+  "layers": [
+    {
+      "id": "dig-scrape/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.42400000000000004,
+      "gain": 0.075,
+      "pan": -0.28,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.32400000000000007,
+          0.68
+        ],
+        [
+          0.42400000000000004,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 98,
+          "decay": 0.1325,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 337.12,
+          "decay": 0.17490000000000003,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 648.76,
+          "decay": 0.07420000000000002,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1011.36,
+          "decay": 0.0424,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "dig-scrape/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0424,
+      "duration": 0.3816,
+      "gain": 0.056,
+      "pan": 0.28,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.20987999999999998,
+          0.68
+        ],
+        [
+          0.3816,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          196
+        ],
+        [
+          0.3816,
+          152.88
+        ]
+      ],
+      "ratio": 2.31,
+      "index": [
+        [
+          0,
+          0.47600000000000003
+        ],
+        [
+          0.3816,
+          0.084
+        ]
+      ]
+    },
+    {
+      "id": "dig-scrape/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.01272,
+      "duration": 0.3869,
+      "gain": 0.012,
+      "pan": -0.22400000000000003,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.23690000000000003,
+          0.68
+        ],
+        [
+          0.3869,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.3869,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "dig-scrape/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.159,
+      "duration": 0.3286,
+      "gain": 0.027,
+      "pan": 0.65,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.216876,
+          0.68
+        ],
+        [
+          0.3286,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          294
+        ],
+        [
+          0.3286,
+          376.32
+        ]
+      ],
+      "ratio": 2.772,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.3286,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

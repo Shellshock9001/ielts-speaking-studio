@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 2.25,
+  "gain": 0.74,
+  "seed": 43763,
+  "layers": [
+    {
+      "id": "festival-cheer/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 1.8,
+      "gain": 0.075,
+      "pan": -0.31,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          1.7,
+          0.68
+        ],
+        [
+          1.8,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 328.5,
+          "decay": 0.5625,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 1130.04,
+          "decay": 0.7425,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 2174.67,
+          "decay": 0.31500000000000006,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 3390.12,
+          "decay": 0.18,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "festival-cheer/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.18,
+      "duration": 1.6199999999999999,
+      "gain": 0.056,
+      "pan": 0.31,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          1.3299999999999998,
+          0.68
+        ],
+        [
+          1.6199999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          657
+        ],
+        [
+          1.6199999999999999,
+          978.93
+        ]
+      ],
+      "ratio": 3.14,
+      "index": [
+        [
+          0,
+          0.374
+        ],
+        [
+          1.6199999999999999,
+          0.066
+        ]
+      ]
+    },
+    {
+      "id": "festival-cheer/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.054,
+      "duration": 1.6425,
+      "gain": 0.012,
+      "pan": -0.248,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          1.4925000000000002,
+          0.68
+        ],
+        [
+          1.6425,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          1.6425,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "festival-cheer/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.6749999999999999,
+      "duration": 1.395,
+      "gain": 0.027,
+      "pan": 0.65,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.9207,
+          0.68
+        ],
+        [
+          1.395,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          985.5
+        ],
+        [
+          1.395,
+          1261.44
+        ]
+      ],
+      "ratio": 3.768,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          1.395,
+          0.08
+        ]
+      ]
+    },
+    {
+      "id": "festival-cheer/floating-tail",
+      "role": "Slow spaced high harmony and stereo decay",
+      "kind": "modal",
+      "start": 1.17,
+      "duration": 0.9,
+      "gain": 0.017,
+      "pan": -0.31,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.7,
+          0.68
+        ],
+        [
+          0.9,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 657,
+          "decay": 0.5625,
+          "amplitude": 0.42
+        },
+        {
+          "frequency": 2260.08,
+          "decay": 0.7425,
+          "amplitude": 0.175
+        },
+        {
+          "frequency": 4349.34,
+          "decay": 0.31500000000000006,
+          "amplitude": 0.055999999999999994
+        },
+        {
+          "frequency": 6780.24,
+          "decay": 0.18,
+          "amplitude": 0.0315
+        }
+      ]
+    }
+  ]
+}

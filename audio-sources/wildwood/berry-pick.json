@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.82,
+  "gain": 0.74,
+  "seed": 69583,
+  "layers": [
+    {
+      "id": "berry-pick/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.656,
+      "gain": 0.075,
+      "pan": 0.24,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.556,
+          0.68
+        ],
+        [
+          0.656,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 270.5,
+          "decay": 0.205,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 930.52,
+          "decay": 0.2706,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 1790.71,
+          "decay": 0.1148,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 2791.56,
+          "decay": 0.06559999999999999,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "berry-pick/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.06559999999999999,
+      "duration": 0.5903999999999999,
+      "gain": 0.056,
+      "pan": -0.24,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.32471999999999995,
+          0.68
+        ],
+        [
+          0.5903999999999999,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          541
+        ],
+        [
+          0.5903999999999999,
+          627.56
+        ]
+      ],
+      "ratio": 3.13,
+      "index": [
+        [
+          0,
+          0.442
+        ],
+        [
+          0.5903999999999999,
+          0.078
+        ]
+      ]
+    },
+    {
+      "id": "berry-pick/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.01968,
+      "duration": 0.5985999999999999,
+      "gain": 0.012,
+      "pan": 0.192,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.4485999999999999,
+          0.68
+        ],
+        [
+          0.5985999999999999,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.5985999999999999,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "berry-pick/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.24599999999999997,
+      "duration": 0.5084,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.33554399999999995,
+          0.68
+        ],
+        [
+          0.5084,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          676.25
+        ],
+        [
+          0.5084,
+          800.68
+        ]
+      ],
+      "ratio": 3.756,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.5084,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

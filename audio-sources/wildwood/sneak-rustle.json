@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.32,
+  "gain": 0.74,
+  "seed": 67001,
+  "layers": [
+    {
+      "id": "sneak-rustle/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.2912,
+      "gain": 0.075,
+      "pan": 0.22,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.1912,
+          0.68
+        ],
+        [
+          0.2912,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 108.5,
+          "decay": 0.08,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 373.24,
+          "decay": 0.10560000000000001,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 718.27,
+          "decay": 0.044800000000000006,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1119.72,
+          "decay": 0.0256,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "sneak-rustle/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.0256,
+      "duration": 0.2304,
+      "gain": 0.056,
+      "pan": -0.22,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.12672,
+          0.68
+        ],
+        [
+          0.2304,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          217
+        ],
+        [
+          0.2304,
+          180.10999999999999
+        ]
+      ],
+      "ratio": 1.33,
+      "index": [
+        [
+          0,
+          0.204
+        ],
+        [
+          0.2304,
+          0.036
+        ]
+      ]
+    },
+    {
+      "id": "sneak-rustle/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.00768,
+      "duration": 0.2336,
+      "gain": 0.012,
+      "pan": 0.17600000000000002,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.12847999999999998,
+          0.68
+        ],
+        [
+          0.2336,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.2336,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    }
+  ]
+}

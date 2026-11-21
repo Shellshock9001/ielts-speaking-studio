@@ -1,76 +1,96 @@
-# SpeakLab Wildwood · IELTS Speaking Adventure
+# SpeakLab Academy — A Living English Adventure
 
-Live: **https://shellshock9001.github.io/ielts-speaking-studio/**
+**Live site:** https://shellshock9001.github.io/ielts-speaking-studio/
 
-An original, **free**, static-hosted English-speaking game and structured IELTS practice course, built with React, TypeScript, Three.js and React Three Fiber. No account, paid backend, external fonts, CDN-hosted code, Supabase or subscriptions. The game world and lesson areas use one shared visual language, while their educational tasks remain distinct.
+A free, independently built, **playable 3D woodland school** for English learners. One continuous React/Three.js world contains 11 themed districts, 44 named student characters, seven faculty members, the original 44 IELTS Speaking Part 2 topics, 178 cue points and 132 Part 3 questions. Lessons remain in the game rather than opening external worksheets.
 
-## Playable village
+This repository is static-hosted on GitHub Pages. There are no paid subscriptions, third-party script CDNs, Supabase dependencies or required accounts.
 
-This is a game, not a decorative 3D menu. A physically controllable woodland character explores an island with collisions, a follow camera, paths, 3D companions, hidden word seeds, quest signs, animated stations and a live reward system. Clicking a world object or a quest destination **moves the character toward it**; choosing an activity doesn't teleport the player away.
+## A world with real actions and consequences
 
-Eleven chapters have individual color palettes, wildlife guides and sculpted landmark sets: Friendship Orchard, Curiosity Workshop, Courage Canyon, Whispering Wetlands, Wanderlight Harbor, Starlit Picture House, Letterbird Village, Together Town Square, Clockwork Meadow, Mooncake Festival, and Skyward Observatory. Each chapter uses the original prompts and expressions for that lesson. Finding more words and completing quests changes the player's outfit and grows their personal adventure progress.
+Movement is not the only gameplay. The player can **explore → choose equipment → use it on an actual object → receive an animation and authored sound → collect or transform something → save progress → unlock further goals**.
 
-**Village Workshop:** students spend earned acorns on a Wildflower Garden, Storytime Bench, Conversation Picnic or Moonlight Arch. Each is an original 3D prop placed in that chapter's meadow, visible immediately and preserved across visits. The shop prevents duplicate purchases, derives available currency from earned rewards and saved furnishings, and never asks for money or an account. Learners gain acorns by improving quest best scores and discovering word seeds, rather than through payment.
+Five visible, modeled tools correspond to real simulation rules:
 
-The four repeatable gameplay modes are:
-
-| Game | What the learner actually does | Educational basis |
+| Tool | Action | World outcome |
 | --- | --- | --- |
-| Word Harvest | Walk into the correct flower among three choices across five rounds; wrong routes have a points cost | Retrieval practice, semantic discrimination, immediate corrective feedback |
-| Story Trail | Build and navigate a connected four-beat route on one cue-card topic, saving the assembled clues | Narrative sequencing, contextual recall, preparation for the IELTS Part 2 long turn |
-| Reasoning Run | Enter the correct argument gate across four rounds and build position → reason → example → nuance | IELTS Part 3 argument structure, elaboration, relevance |
-| Voice Lanterns | Give sustained, audible speech into the microphone to light four actual real-time 3D lanterns, review and download the result | Speaking fluency and confidence; **voice activity is not pronunciation scoring** |
+| Gather | Pick fruit or harvest mature flowers | Berries, petals, seeds and XP |
+| Butterfly Net | Time a swing near a fluttering butterfly | Catch a district-specific creature or miss |
+| Spade | Uncover a relic or plant a flower seed | Curio discovery or newly planted garden |
+| Watering Can | Tend an unwatered flowerbed | Timed growth into a harvestable bloom |
+| Fishing Rod | Cast near the pond and reel during the bite window | Fish added to the field guide and bag |
 
-The village additionally contains **five collectible language seeds per chapter**. Discover one in the 3D world, retrieve its phrase from a meaning prompt, and keep the reward. NPC conversations let learners respond in their own words, give examples and save responses. Results, best scores, chapter completion, collected seeds, saved conversations, story routes, furniture, writing notes and evaluations persist in the local learning journal. Quest points and acorns are game rewards, **not IELTS bands**.
+Craft bouquets from actual gathered ingredients, give them to classmates, grow individual friendships, and watch friendship markers appear above their in-world characters. A physical inventory preserves materials. **The 38-slot Field Guide** records distinct district butterflies, curiosities, flowers and fish, rewarding the first 3, 8, 15, 24 and all 38 unique discoveries. Explorer XP advances outfits. Three rotating, date-scoped daily missions count actual actions and grant acorns when completed. Furniture built with acorns changes the world permanently. Repeated harvesting of a collected resource is limited until the next day; learning exercises remain replayable without limit.
 
-## How to control it
+All game state—including collected objects, garden timing, acorns, equipment, world position, discoveries, relationships and lesson work—is local to this browser. Use the storybook to export/import progress. Clearing browser data will remove progress if it wasn't exported.
 
-- **Desktop:** WASD or arrow keys to walk; hold Shift to run; E to talk to a nearby guide or enter an activity. Click a ground destination, a glowing sign, a collectible, an NPC, or a quest in the sidebar to walk toward it.
-- **Phone/tablet:** on-screen directional pad, Talk/Explore and Run controls. Large touch targets. Quest choices bring the play area back into view. The game has been exercised at 320px and larger widths without horizontal overflow.
-- **Low-powered or WebGL-disabled devices:** a 2D accessible mode keeps the full learning rules, question choices, hidden words, conversation activities and progress usable. This deliberately substitutes controls for spatial movement.
-- **Reduced-motion preference:** unnecessary decorative transitions are suppressed without preventing essential game movement.
-- **Audio:** toggle on the app header to hear four original multi-layer Vision-authored sound cues (arrival, harvest, station travel, completion). Sounds are optional and suppressed during learner microphone recording. No copied game sounds or stock click samples.
+## English learning within the same world
 
-The 3D canvas is retained across lesson navigation, avoiding reinitialization when returning to play. Its animation loop pauses when the stage is offscreen or the document is hidden. Rewards and camera follow motions continue while the canvas is visible, including during celebration screens.
+Each of the 44 IELTS speaking topics belongs to a distinct woodland student. Their conversations cover personal examples, opinions, reasons, counterpoints and saved replies. Seven faculty guide the rest: Professor Maple teaches in-world lessons, Quill handles spaced recall, Ada conducts timed three-part speaking rehearsals, Bloom teaches word retrieval, Caramel runs construction, Fable guides exploration and Glitter hosts the speaking festival.
 
-## Structured English curriculum
+The academy contains teacher-led classrooms with models, grammar, pronunciation and photo observation; Flower Harvest; a four-beat Story Trail; Reasoning Run; speaking lanterns; five hidden phrase-retrieval seeds in each district; a spaced memory library; an atlas; a workshop; a storybook; and a full simulated interview with manually entered feedback.
 
-The source question bank from the supplied teaching screenshots has **44 unique Part 2 topics, 178 cue points and 132 Part 3 discussion questions**. It is divided into 11 thematic teaching chapters and Week 12 mock speaking practice. This is separate from the game and includes photo observation, vocabulary matching, phrase recall, written planning, timed speaking, browser-local recordings, teacher/self-assessment notes, spaced retrieval, model narratives, grammar and pronunciation guidance.
+**Game points do not equal an IELTS band.** The experience does not fabricate automatic pronunciation grades or AI-written classmate responses. Microphone audio is browser-local; download your recording if you want to keep it.
 
-Students are encouraged to form their own responses; game completion alone doesn't measure real-world speaking proficiency. The mock offers the four IELTS Speaking rubric categories for **human observations**, not automatic band grading. SpeakLab is not affiliated with IELTS test owners.
+## Controls — desktop, touch and gamepad
 
-## Progress, privacy and hosting limitations
+| Input | Real gameplay action |
+| --- | --- |
+| **WASD / arrows** | Walk relative to the orbiting camera |
+| **Shift** | Sprint, consuming and regenerating stamina |
+| **Ctrl / C** | Hold to sneak / toggle sneak |
+| **Space / Alt** | Jump / dodge with cooldown and follow-through |
+| **E / F / G / V** | Talk / use equipped tool / give a bouquet / wave |
+| **1–5 / Tab** | Equip one of five 3D tools / cycle tools |
+| **I / B / Q** | Inventory and crafting / creature field guide / daily missions |
+| **M / J / H / Esc** | World atlas / learning storybook / game controls / close |
+| **Z** | Recenter camera |
+| **Right-drag / scroll** | Orbit / zoom camera |
+| **Mouse click** | Walk to a world point, classmate, resource, puzzle object or destination |
 
-Progress is saved in this browser using localStorage and can be **exported/imported as JSON** in Settings. Recordings remain local and must be downloaded before leaving the session. No student audio is uploaded. Clearing browser storage can erase local progress. Cross-device sync is not implemented.
+**Gamepad:** left stick moves; right stick orbits; A jumps, B dodges, X interacts, Y uses equipment, bumpers cycle the quick belt, trigger sprints, Start shows missions, Back opens the bag. Mouse, keyboard and a pointer-captured thumbstick have direct game actions; desktop also displays a usable directional pad. Phones/tablets receive touch-friendly movement and action controls, responsive notebook sheets and safe-area-aware layouts.
 
-All runtime scripts, content, photography and original audio are self-hosted in the project. After the first successful visit, a versioned service worker caches the compiled application and media for repeat **offline study**.
+Without WebGL, a 2D mode keeps every teaching activity, resource rule, crafting, collection, gifting and fishing accessible without presenting fake nonfunctional movement buttons.
 
-**China access:** GitHub Pages availability cannot be guaranteed in mainland China. The exact URL was submitted to GreatFire on November 20, 2026, but the service returned no conclusive measurement at that time. A mainland-network test of this exact URL and/or a separately hosted mirror is needed before promising access to Chinese students. Offline caching cannot solve first-time access if the origin is blocked.
+## Original sounds authored by Vision
 
-## Local development
+The **58 original stereo sound cues** were actually defined and rendered through Vision's audio studio—not selected from a stock effects list. Original editable layered sound scores live in `audio-sources/wildwood/`; 48 kHz, 16-bit stereo WAVs live in `public/audio/wildwood/`; reproduce the design process using `scripts/vision-score-world.mjs`. The scores contain modal resonators, frequency-modulated materials, independent surface-air/noise layers, stereo answers and individually shaped envelopes.
 
-```bash
+Each district has its own acoustic arrival and all major actions have distinct sound: movement, footsteps, takeoff and landing, sprint, sneak, roll, butterfly net, harvesting, soil, watering, growth, fishing, gifting, crafting, assessment, conversations, library, festival, tools, quests and more. Playback uses one shared Web Audio context with finite voices, separate semantic families, cancellation and compression. Sound starts on the **first eligible user gesture**, honors persistent mute and volume settings, and is suppressed during microphone capture. Browsers cannot start audio before user interaction.
+
+Vision waveform/render verification proves the authored assets, not subjective listening quality. Headphone/device listening remains a separate QA requirement.
+
+## Privacy, offline use and hosting
+
+No learner audio is uploaded. No automatic cross-device sync exists. The versioned service worker caches the compiled game and source learning material for later offline visits and caches audio on first use. Repeated visits after successful installation can work offline; first-time play requires a reachable origin.
+
+GitHub Pages availability **is not guaranteed in mainland China**. A real test from a mainland network or verified alternate host is required before promising availability.
+
+## Build and verification
+
+```sh
 npm ci
+npm test
+npm run build
 npm run dev
 # http://127.0.0.1:5174/ielts-speaking-studio/
 
-npm test
-npm run build
+node scripts/academy-gameplay-smoke.cjs
+node scripts/academy-smoke.cjs
+node scripts/academy-extended-smoke.cjs
+node scripts/academy-spatial-smoke.cjs
+node scripts/academy-audio-smoke.cjs
+node scripts/academy-responsive-smoke.cjs
+
 npm run preview -- --port 4174
+# use SPEAKLAB_BASE=http://127.0.0.1:4174/ielts-speaking-studio/
+node scripts/academy-offline-smoke.cjs
 ```
 
-Use the local production preview when running browser end-to-end tests:
+Tests assert the preservation of every source IELTS topic and expression, all layered sound files and checksums, real WebGL movement, equipment and action results, timed planting/fishing/catching, one-time rewards, saved quests, NPC interactions, microphone recording, honest scoring, mobile/tablet layouts, service worker offline boot and local persistence. Playwright uses an installed Edge or Chromium; set `BROWSER_EXECUTABLE` for another path.
 
-```bash
-node scripts/game-smoke.cjs
-node scripts/game-extended-smoke.cjs
-node scripts/game-voice-smoke.cjs
-```
+GitHub Actions builds, runs source tests and publishes the static `dist/` folder from `main`. Real production verification requires seeing the workflow succeed and testing the live URL.
 
-Browser tests use Playwright Core and a locally installed Edge/Chromium executable. On nonstandard setups set `BROWSER_EXECUTABLE` and `SPEAKLAB_BASE`. `game-smoke.cjs` validates real WebGL movement, click-to-walk, five-round harvesting, reward-based 3D construction, all eleven biomes, route retention and 320px touch controls. `game-extended-smoke.cjs` exercises seed retrieval, saved conversations, story and debate progression, simulated mistakes, village building and the accessible no-WebGL mode. `game-voice-smoke.cjs` builds a temporary controlled mono microphone fixture from SpeakLab's own authored audio and checks four-lantern completion. Temporary screenshots and fixtures live in `analysis/` (ignored by Git).
+## Originality
 
-GitHub Actions runs `npm ci`, `npm test`, a production build, and deploys the `dist/` folder to GitHub Pages on main. All links use a project-relative base path and hash routes to avoid static-hosting 404s.
-
-## Original assets
-
-All stylized animals, landmarks, mini-games, expressions and sound compositions are produced for this educational project. They adopt the broad genre of cozy exploration without copying Animal Crossing characters, game assets, music, or branded presentation. Four authored stereo sound scores live in `audio-sources/` and mastered WAV files in `public/audio/`; see `scripts/master_audio.py`. Production compilation and signal checks are automated; artistic audition on target devices remains a separate quality check.
+The world, characters, scene geometry, action systems and sound performances are original work for this academy. They are not copied from an existing commercial game. The site is not affiliated with the IELTS owners.

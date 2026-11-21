@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 3.96,
+  "gain": 0.74,
+  "seed": 61837,
+  "layers": [
+    {
+      "id": "region-observatory/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 3.168,
+      "gain": 0.075,
+      "pan": 0.38,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          3.068,
+          0.68
+        ],
+        [
+          3.168,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 330,
+          "decay": 0.99,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 1135.2,
+          "decay": 1.3068,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 2184.6,
+          "decay": 0.5544,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 3405.6,
+          "decay": 0.3168,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "region-observatory/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.3168,
+      "duration": 2.8512,
+      "gain": 0.056,
+      "pan": -0.38,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          2.5612,
+          0.68
+        ],
+        [
+          2.8512,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          660
+        ],
+        [
+          2.8512,
+          831.6
+        ]
+      ],
+      "ratio": 2.61,
+      "index": [
+        [
+          0,
+          0.357
+        ],
+        [
+          2.8512,
+          0.063
+        ]
+      ]
+    },
+    {
+      "id": "region-observatory/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.09504,
+      "duration": 2.8908,
+      "gain": 0.012,
+      "pan": 0.30400000000000005,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          2.7408,
+          0.68
+        ],
+        [
+          2.8908,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          2.8908,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "region-observatory/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 1.188,
+      "duration": 2.4552,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          1.620432,
+          0.68
+        ],
+        [
+          2.4552,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          825
+        ],
+        [
+          2.4552,
+          976.8
+        ]
+      ],
+      "ratio": 3.1319999999999997,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          2.4552,
+          0.08
+        ]
+      ]
+    },
+    {
+      "id": "region-observatory/floating-tail",
+      "role": "Slow spaced high harmony and stereo decay",
+      "kind": "modal",
+      "start": 2.0592,
+      "duration": 1.584,
+      "gain": 0.017,
+      "pan": 0.38,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          1.3840000000000001,
+          0.68
+        ],
+        [
+          1.584,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 660,
+          "decay": 0.99,
+          "amplitude": 0.42
+        },
+        {
+          "frequency": 2270.4,
+          "decay": 1.3068,
+          "amplitude": 0.175
+        },
+        {
+          "frequency": 4369.2,
+          "decay": 0.5544,
+          "amplitude": 0.055999999999999994
+        },
+        {
+          "frequency": 6811.2,
+          "decay": 0.3168,
+          "amplitude": 0.0315
+        }
+      ]
+    }
+  ]
+}

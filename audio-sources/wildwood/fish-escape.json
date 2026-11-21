@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.85,
+  "gain": 0.74,
+  "seed": 85075,
+  "layers": [
+    {
+      "id": "fish-escape/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.68,
+      "gain": 0.075,
+      "pan": 0.31,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.5800000000000001,
+          0.68
+        ],
+        [
+          0.68,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 125,
+          "decay": 0.2125,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 430,
+          "decay": 0.2805,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 827.5,
+          "decay": 0.11900000000000001,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1290,
+          "decay": 0.068,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "fish-escape/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.068,
+      "duration": 0.612,
+      "gain": 0.056,
+      "pan": -0.31,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.3366,
+          0.68
+        ],
+        [
+          0.612,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          250
+        ],
+        [
+          0.612,
+          187.5
+        ]
+      ],
+      "ratio": 1.96,
+      "index": [
+        [
+          0,
+          0.391
+        ],
+        [
+          0.612,
+          0.069
+        ]
+      ]
+    },
+    {
+      "id": "fish-escape/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.0204,
+      "duration": 0.6204999999999999,
+      "gain": 0.012,
+      "pan": 0.248,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.4704999999999999,
+          0.68
+        ],
+        [
+          0.6204999999999999,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.6204999999999999,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "fish-escape/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.255,
+      "duration": 0.527,
+      "gain": 0.027,
+      "pan": -0.67,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.34782,
+          0.68
+        ],
+        [
+          0.527,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          312.5
+        ],
+        [
+          0.527,
+          370
+        ]
+      ],
+      "ratio": 2.352,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.527,
+          0.08
+        ]
+      ]
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
-  "name":"SpeakLab Village — Your English adventure",
-  "short_name":"SpeakLab Village",
+  "name":"SpeakLab Academy | Explore English Together",
+  "short_name":"SpeakLab Academy",
   "id":"/ielts-speaking-studio/",
-  "start_url":"/ielts-speaking-studio/#village",
+  "start_url":"/ielts-speaking-studio/",
   "scope":"/ielts-speaking-studio/",
   "display":"standalone",
-  "background_color":"#f8f6ed",
-  "theme_color":"#f8f6ed",
-  "description":"Free original IELTS Speaking world with self-paced interactive lessons and local progress.",
+  "background_color":"#d8e8d8",
+  "theme_color":"#d8e8d8",
+  "description":"Free game-first woodland academy with 44 IELTS Speaking topics, classmates, classrooms, practice exams and private local progress.",
   "icons":[{"src":"/ielts-speaking-studio/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
 }

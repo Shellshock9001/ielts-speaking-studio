@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {BUILD_COST,spentAcorns,type BuildingId} from './game/buildings';
+import {hydrateField,initialField,type FieldState} from './world/play';
 
 export type Score={date:string; topic:string; fluency:number; lexical:number; grammar:number; pronunciation:number; notes:string};
 export type Card={interval:number; due:string; seen:number};
@@ -10,10 +11,12 @@ export type Progress={
  quests:Record<string,QuestResult>;
  foundSeeds:Record<string,boolean>;
  decorations:Record<string,string[]>;
+ worldPosition:[number,number]|null;
+ field:FieldState;
  lastVisit:number|null;
 };
 const key='speaklab-progress-v1';
-export const blank=():Progress=>({completed:[],notes:{},topicNotes:{},reflection:{},rubric:[],cards:{},reviewedTopics:[],quizResults:{},quests:{},foundSeeds:{},decorations:{},lastVisit:null});
+export const blank=():Progress=>({completed:[],notes:{},topicNotes:{},reflection:{},rubric:[],cards:{},reviewedTopics:[],quizResults:{},quests:{},foundSeeds:{},decorations:{},worldPosition:null,field:initialField(),lastVisit:null});
 const object=(value:unknown):value is Record<string,unknown>=>typeof value==='object' && value!==null && !Array.isArray(value);
 export function hydrate(value:unknown):Progress{
   const initial=blank();
@@ -39,6 +42,9 @@ export function hydrate(value:unknown):Progress{
     decorations:object(value.decorations)?Object.fromEntries(Object.entries(value.decorations).filter(([,v])=>Array.isArray(v)).map(([k,v])=>[
       k,[...new Set((v as unknown[]).filter((id):id is BuildingId=>typeof id==='string'&&BUILD_COST.has(id as BuildingId)))]
     ])) as Record<string,string[]>:{},
+    worldPosition:Array.isArray(value.worldPosition)&&value.worldPosition.length===2&&value.worldPosition.every(v=>typeof v==='number'&&Number.isFinite(v)&&Math.abs(v)<200)?
+      [value.worldPosition[0],value.worldPosition[1]]:null,
+    field:hydrateField(value.field),
     lastVisit:typeof value.lastVisit==='number'?value.lastVisit:null
   };
 }
@@ -68,7 +74,7 @@ export function useProgress(){
     const cost=BUILD_COST.get(item);
     if(!cost||!Number.isInteger(week)||week<1||week>11)return p;
     const key=String(week),owned=p.decorations[key]||[];
-    const earned=Object.values(p.quests).reduce((sum,v)=>sum+Math.floor(v.best/20),0)+Object.values(p.foundSeeds).filter(Boolean).length;
+    const earned=Object.values(p.quests).reduce((sum,v)=>sum+Math.floor(v.best/20),0)+Object.values(p.foundSeeds).filter(Boolean).length+p.field.bonusAcorns;
     if(owned.includes(item)||earned-spentAcorns(p.decorations)<cost)return p;
     return {...p,decorations:{...p.decorations,[key]:[...owned,item]}};
   }),[update]);

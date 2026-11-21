@@ -1,0 +1,528 @@
+{
+  "sessionId": "15002263-9dc1-4056-908a-00f95724b47d",
+  "renderer": "Vision acoustic studio",
+  "cues": [
+    {
+      "id": "foot-grass",
+      "path": "public/audio/wildwood/foot-grass.wav",
+      "sha256": "5bcea9002d77f481710f195d273a380c099df1300ac0e16a831891c07599fd30",
+      "peakDbFS": -26.55297288197189,
+      "duration": 0.25,
+      "layers": 3,
+      "visionReceipt": "f96f5852-661b-441d-be70-c6e7f5550cbb"
+    },
+    {
+      "id": "foot-wood",
+      "path": "public/audio/wildwood/foot-wood.wav",
+      "sha256": "c7ad0d6751ef11f63613b2683d95c41ac961ce53bec439b65855b18982185a17",
+      "peakDbFS": -26.53501439904847,
+      "duration": 0.24,
+      "layers": 3,
+      "visionReceipt": "2d0ec08b-b6cf-48d4-a324-0acec167306e"
+    },
+    {
+      "id": "move-start",
+      "path": "public/audio/wildwood/move-start.wav",
+      "sha256": "ee80b6857533665bdedbc268fb0e85d06ae1670b767d345a824311ffa86a71f2",
+      "peakDbFS": -26.557132758601234,
+      "duration": 0.43,
+      "layers": 4,
+      "visionReceipt": "c572808f-5b92-4a76-b86b-fa09125dc77a"
+    },
+    {
+      "id": "peer-hello",
+      "path": "public/audio/wildwood/peer-hello.wav",
+      "sha256": "d9126895b26b191cd6ba31ee35c84ac36ce5c8d4a1f3d68483d883b2e46cad06",
+      "peakDbFS": -26.481127150001022,
+      "duration": 0.74,
+      "layers": 4,
+      "visionReceipt": "47fbd08f-16f2-467d-abac-9815abb3733b"
+    },
+    {
+      "id": "mentor-hello",
+      "path": "public/audio/wildwood/mentor-hello.wav",
+      "sha256": "99a45d52c04d11dee9279151168ce5f1001f27ffbfa2b9a2d197e1e91c488b10",
+      "peakDbFS": -26.091837584121073,
+      "duration": 0.99,
+      "layers": 4,
+      "visionReceipt": "cdb41329-6025-404b-ac93-4b218e5c7e6d"
+    },
+    {
+      "id": "chat-open",
+      "path": "public/audio/wildwood/chat-open.wav",
+      "sha256": "0e27fc66111fa4f69ea01c79452aebbe370320be7ae483149b317ecc58dc0875",
+      "peakDbFS": -26.59304510467774,
+      "duration": 0.58,
+      "layers": 4,
+      "visionReceipt": "660f2ea5-8fee-4e07-8d5b-e281ad1cb182"
+    },
+    {
+      "id": "chat-choice",
+      "path": "public/audio/wildwood/chat-choice.wav",
+      "sha256": "d417233430c7e9b3143c1d073de5b3d75ce03fb1074643104aad3578f0f37468",
+      "peakDbFS": -26.36113098566768,
+      "duration": 0.45,
+      "layers": 4,
+      "visionReceipt": "f23e6877-2f2d-4d21-8fb2-a40d300c4c4b"
+    },
+    {
+      "id": "correct",
+      "path": "public/audio/wildwood/correct.wav",
+      "sha256": "684c6d46d5de15a1ce677d474fe1843a439e5384e53765a10bf4330d957462d8",
+      "peakDbFS": -26.12095061526004,
+      "duration": 0.89,
+      "layers": 4,
+      "visionReceipt": "52b51717-42b1-4d59-b112-67fd806a68db"
+    },
+    {
+      "id": "try-again",
+      "path": "public/audio/wildwood/try-again.wav",
+      "sha256": "b19fb6ef173b1f6b36b992ec543a4b1e3a85d0ab3c1bd2ec18b2e9872a75b39d",
+      "peakDbFS": -26.405096421370736,
+      "duration": 0.66,
+      "layers": 4,
+      "visionReceipt": "ab8dc636-ec93-4fd9-99fd-5c05a327c673"
+    },
+    {
+      "id": "seed-find",
+      "path": "public/audio/wildwood/seed-find.wav",
+      "sha256": "405d80197048c1bcb331d4fe2a8fa422a00ec440fa9b5aadf5d2fb062eebd1da",
+      "peakDbFS": -25.77187917292507,
+      "duration": 1.06,
+      "layers": 4,
+      "visionReceipt": "adbaa911-ad80-4808-8256-fc6f0c65a1f0"
+    },
+    {
+      "id": "page-turn",
+      "path": "public/audio/wildwood/page-turn.wav",
+      "sha256": "1808175123ca54a53fe796e5699186eabb77c6950903d557bd8395d225fd7f58",
+      "peakDbFS": -26.917622197248654,
+      "duration": 0.57,
+      "layers": 4,
+      "visionReceipt": "462e8a73-ebf7-46d2-b224-72d3327901d4"
+    },
+    {
+      "id": "region-enter",
+      "path": "public/audio/wildwood/region-enter.wav",
+      "sha256": "a414801206c9020fbebb37c6d43fea6a7b67b2d87ca3536adfb848a81a86fa07",
+      "peakDbFS": -26.302259829257245,
+      "duration": 1.26,
+      "layers": 4,
+      "visionReceipt": "1245820b-d7bb-4a39-a4fa-3f5060e06f95"
+    },
+    {
+      "id": "voice-rise",
+      "path": "public/audio/wildwood/voice-rise.wav",
+      "sha256": "6f8b025434d99c4be3703e54d89a40d38030a3f72338c67a7305e9e263f94e03",
+      "peakDbFS": -25.672753435846648,
+      "duration": 1.17,
+      "layers": 4,
+      "visionReceipt": "213f7d77-adea-4f59-a58f-7331993bd0d7"
+    },
+    {
+      "id": "assessment-start",
+      "path": "public/audio/wildwood/assessment-start.wav",
+      "sha256": "2329e59a8f7e38cf7f7c239c2ce91b19820528f3e3692d8e7d2331da6045380e",
+      "peakDbFS": -25.764961226113492,
+      "duration": 1.48,
+      "layers": 5,
+      "visionReceipt": "adea7e54-edff-443c-b117-3a73bae65e9c"
+    },
+    {
+      "id": "assessment-finish",
+      "path": "public/audio/wildwood/assessment-finish.wav",
+      "sha256": "6db217db9b9b4ae2ffafdeaa443c1c763b32e68a70601c7390a4512a62360123",
+      "peakDbFS": -25.499059226435108,
+      "duration": 2.06,
+      "layers": 5,
+      "visionReceipt": "17ed7224-b1dd-4e84-bfa2-d1792a872d90"
+    },
+    {
+      "id": "furniture-place",
+      "path": "public/audio/wildwood/furniture-place.wav",
+      "sha256": "ac02e3699dfb5a5332ccfda2ed452cc14d131ac4b82bd326036c849a363bf271",
+      "peakDbFS": -25.190159128531118,
+      "duration": 0.9,
+      "layers": 4,
+      "visionReceipt": "973b19f5-d9fd-435d-a6d3-41788347cc53"
+    },
+    {
+      "id": "quest-accept",
+      "path": "public/audio/wildwood/quest-accept.wav",
+      "sha256": "15c149233e07228559354b20b5a736463d7e750b20b807f701bf0b9bb190a17f",
+      "peakDbFS": -26.427600997329254,
+      "duration": 0.83,
+      "layers": 4,
+      "visionReceipt": "c6adbf40-e9c9-44e2-9f41-09ea56a94d43"
+    },
+    {
+      "id": "quest-finish",
+      "path": "public/audio/wildwood/quest-finish.wav",
+      "sha256": "5bc67ca65afaafe46282ec3b28997c680d6c3fa863bf4535c5683a1c672acb24",
+      "peakDbFS": -25.766869019496145,
+      "duration": 1.57,
+      "layers": 5,
+      "visionReceipt": "077e78aa-60ee-4c85-be44-2269a2456805"
+    },
+    {
+      "id": "map-open",
+      "path": "public/audio/wildwood/map-open.wav",
+      "sha256": "40f63cc3c22cc54f16772f765b56c7a866e839250564a43b779ce9021df644af",
+      "peakDbFS": -26.818565852718784,
+      "duration": 0.66,
+      "layers": 4,
+      "visionReceipt": "3a8b6977-d515-4833-b29b-a2018251abe1"
+    },
+    {
+      "id": "festival-cheer",
+      "path": "public/audio/wildwood/festival-cheer.wav",
+      "sha256": "3910ea0215dd4971ad1935f0bbe188cfb461325718f23a87d7cbe78a3f6aaeeb",
+      "peakDbFS": -25.492058721208075,
+      "duration": 2.25,
+      "layers": 5,
+      "visionReceipt": "7427ad9c-816d-4928-8394-af42cfe7bc49"
+    },
+    {
+      "id": "classroom-door",
+      "path": "public/audio/wildwood/classroom-door.wav",
+      "sha256": "93ce292a9f924e74a278c7967e24eae66248abaa07a2a4af0a2c5282582f1b0f",
+      "peakDbFS": -25.202908478185606,
+      "duration": 0.91,
+      "layers": 4,
+      "visionReceipt": "da5c20b8-b2f0-4dfc-b0b3-938b852ff92c"
+    },
+    {
+      "id": "memory-recall",
+      "path": "public/audio/wildwood/memory-recall.wav",
+      "sha256": "7edcf24b3f4b1320a297b74f5dc5a2abb95c27daf818e0db29eba1e3eb5ffeed",
+      "peakDbFS": -26.15869609347439,
+      "duration": 1.02,
+      "layers": 4,
+      "visionReceipt": "a8f91523-a681-48fb-ae76-77731cb61ef5"
+    },
+    {
+      "id": "region-academy",
+      "path": "public/audio/wildwood/region-academy.wav",
+      "sha256": "3858eaa1ec30af204bcc3765ebc787d177cdd50818562c2d46c76c6b82c898dc",
+      "peakDbFS": -25.57248932841223,
+      "duration": 3.06,
+      "layers": 5,
+      "visionReceipt": "e110e505-0754-40a8-a323-311ec92223ed"
+    },
+    {
+      "id": "region-orchard",
+      "path": "public/audio/wildwood/region-orchard.wav",
+      "sha256": "3989fba57b976a43f419ea9ea89a64002c6efb956cd7b2e63a41b103246f258b",
+      "peakDbFS": -25.21574241398532,
+      "duration": 3.38,
+      "layers": 5,
+      "visionReceipt": "f7bfec40-1c9a-4447-acf2-f4923933471f"
+    },
+    {
+      "id": "region-workshop",
+      "path": "public/audio/wildwood/region-workshop.wav",
+      "sha256": "edd5bd22a8e6cc6e550e5a0b17554c923abf8b64646bef9c8152eb2ef8a79612",
+      "peakDbFS": -25.447479556111908,
+      "duration": 2.83,
+      "layers": 5,
+      "visionReceipt": "f98ff817-88f1-4b3f-a1a8-c62d5946f282"
+    },
+    {
+      "id": "region-canyon",
+      "path": "public/audio/wildwood/region-canyon.wav",
+      "sha256": "670bd0a5f045ccc14c8f7d4b73670db44db3ed2451587c5551bb6696c5765f2d",
+      "peakDbFS": -25.639002646388143,
+      "duration": 3.15,
+      "layers": 5,
+      "visionReceipt": "08545918-6a94-4e5b-8b3c-72a8662bd77c"
+    },
+    {
+      "id": "region-wetlands",
+      "path": "public/audio/wildwood/region-wetlands.wav",
+      "sha256": "4d43c59272aa1c5948e1a126e9a149ec717e5f97fc2ae4611c0f38bd6140036d",
+      "peakDbFS": -25.315909939746028,
+      "duration": 3.4,
+      "layers": 5,
+      "visionReceipt": "b6467dc6-262c-4155-835c-e3a89e44995f"
+    },
+    {
+      "id": "region-harbor",
+      "path": "public/audio/wildwood/region-harbor.wav",
+      "sha256": "334d9655d3e4186d1328415629b0e17ea837f1ee68d5fdcfd94bae743a53c21d",
+      "peakDbFS": -25.48688852024177,
+      "duration": 3.65,
+      "layers": 5,
+      "visionReceipt": "a5c81c1a-5ac6-4234-a125-79d7dac7bb48"
+    },
+    {
+      "id": "region-picturehouse",
+      "path": "public/audio/wildwood/region-picturehouse.wav",
+      "sha256": "b9398dd4632e1205cf1f1c703803b201f2a43bd92e55ff952c95cc5325e0364e",
+      "peakDbFS": -25.566894308454657,
+      "duration": 3.2,
+      "layers": 5,
+      "visionReceipt": "7d21c35f-64dd-4c81-87be-4af79b56c77e"
+    },
+    {
+      "id": "region-letterbird",
+      "path": "public/audio/wildwood/region-letterbird.wav",
+      "sha256": "2262d0af0ae5552dffdaaeadd491f283ceefbb8acce224939b9e694313683ce4",
+      "peakDbFS": -25.294413682153248,
+      "duration": 2.82,
+      "layers": 5,
+      "visionReceipt": "1ba0bdb4-d138-4b60-92af-ebf4057cf2da"
+    },
+    {
+      "id": "region-together",
+      "path": "public/audio/wildwood/region-together.wav",
+      "sha256": "5a20398fb1eb994705dc74db5145d61d558c7d8af2422c073c214d61451e7c4f",
+      "peakDbFS": -25.469915032985,
+      "duration": 3.45,
+      "layers": 5,
+      "visionReceipt": "1a09944a-f308-4e24-9009-57044cc8cdec"
+    },
+    {
+      "id": "region-clockwork",
+      "path": "public/audio/wildwood/region-clockwork.wav",
+      "sha256": "7054200c1e204e6dd2e74524f2f5268ab8a07df42a7c9bd6599449e7c9be9b87",
+      "peakDbFS": -25.436832936528987,
+      "duration": 3.14,
+      "layers": 5,
+      "visionReceipt": "7b5576e5-198e-4484-949e-6f7ea84c70c3"
+    },
+    {
+      "id": "region-mooncake",
+      "path": "public/audio/wildwood/region-mooncake.wav",
+      "sha256": "d67abdec187d18d15ee0de7acb3c7fb4ddbd10ceaadf102d7c80a8533dcb0dd6",
+      "peakDbFS": -25.717459518023198,
+      "duration": 3.75,
+      "layers": 5,
+      "visionReceipt": "960ddfdb-c419-47dd-8bd0-c5fa6491ea38"
+    },
+    {
+      "id": "region-observatory",
+      "path": "public/audio/wildwood/region-observatory.wav",
+      "sha256": "918d540459a5e5d154fd0234b132d29741026d8b245cc1016e991d790088caa7",
+      "peakDbFS": -25.30090599129252,
+      "duration": 3.96,
+      "layers": 5,
+      "visionReceipt": "4ac2e9fb-7cb1-43a5-9b56-2488cea4e48c"
+    },
+    {
+      "id": "hop-takeoff",
+      "path": "public/audio/wildwood/hop-takeoff.wav",
+      "sha256": "2420189f2234ff3ac4b86e3708dbb3d01781aa418da1e096b788e9b2241a9b73",
+      "peakDbFS": -26.266750003628253,
+      "duration": 0.41,
+      "layers": 4,
+      "visionReceipt": "53a3790a-6398-4211-a2b1-011b123f551b"
+    },
+    {
+      "id": "hop-land",
+      "path": "public/audio/wildwood/hop-land.wav",
+      "sha256": "4b595c511912e6b3863e6352a99e98389a53581bd497c83e1717b5106f5299c4",
+      "peakDbFS": -26.801844039276183,
+      "duration": 0.46,
+      "layers": 4,
+      "visionReceipt": "b2e3066a-a62b-4915-9664-dd07053ef15e"
+    },
+    {
+      "id": "dash-boost",
+      "path": "public/audio/wildwood/dash-boost.wav",
+      "sha256": "0cca09c78bbe57d70eb12d7d58b24060862e149808c101473bb15c59f3eb862c",
+      "peakDbFS": -25.81269516249555,
+      "duration": 0.51,
+      "layers": 4,
+      "visionReceipt": "d8f78cca-a76a-41d9-a4e6-fd255e818562"
+    },
+    {
+      "id": "sneak-rustle",
+      "path": "public/audio/wildwood/sneak-rustle.wav",
+      "sha256": "c4999ba61c14a933b581cbc53f1b5dbc462ccadf6af7c51648f315775fc8f118",
+      "peakDbFS": -27.798402985824392,
+      "duration": 0.32,
+      "layers": 3,
+      "visionReceipt": "7a136a0a-5627-4cd9-a6ef-815b39ee3dbf"
+    },
+    {
+      "id": "dodge-roll",
+      "path": "public/audio/wildwood/dodge-roll.wav",
+      "sha256": "f80ea635758c905aad8558933731d43d38ca50b31126c48ed4d9c13a85d6041a",
+      "peakDbFS": -25.89718503875663,
+      "duration": 0.8,
+      "layers": 4,
+      "visionReceipt": "3fc7cc63-cc49-40ef-a0d3-19445503815f"
+    },
+    {
+      "id": "berry-pick",
+      "path": "public/audio/wildwood/berry-pick.wav",
+      "sha256": "ea3e763c7d66f2e55229e26f0ba6a3fd3cf74f8e84c97c65f5a68759dd804a4e",
+      "peakDbFS": -26.008844786700713,
+      "duration": 0.82,
+      "layers": 4,
+      "visionReceipt": "6ef5ecbf-df30-4f37-805f-440549260f28"
+    },
+    {
+      "id": "net-swish",
+      "path": "public/audio/wildwood/net-swish.wav",
+      "sha256": "ed6299bff4c3dc9ac8fe98e5babf43f8924ab31fac1b01e393b55866e29dfe5e",
+      "peakDbFS": -26.673507413213223,
+      "duration": 0.51,
+      "layers": 4,
+      "visionReceipt": "b797f600-fee6-48ae-9d21-d1c60a5f7776"
+    },
+    {
+      "id": "net-catch",
+      "path": "public/audio/wildwood/net-catch.wav",
+      "sha256": "b8edac0f048d1974a6a936f3aa4eb1e2a4db38cf5a469838961d3cf9a2f9ec79",
+      "peakDbFS": -25.79756503527129,
+      "duration": 1.1,
+      "layers": 4,
+      "visionReceipt": "57424e55-7de3-4a76-82ac-c1fdea376366"
+    },
+    {
+      "id": "net-miss",
+      "path": "public/audio/wildwood/net-miss.wav",
+      "sha256": "c8e0b67fae2a1992342c025664bcf75f6373898e0bd7241b650704b6480cb145",
+      "peakDbFS": -26.245523982940163,
+      "duration": 0.64,
+      "layers": 4,
+      "visionReceipt": "42a43bc7-afc9-4960-a3b7-50176988d74a"
+    },
+    {
+      "id": "dig-scrape",
+      "path": "public/audio/wildwood/dig-scrape.wav",
+      "sha256": "6751bc146182fd095e885bc48a0d3ead60ea239a9db5b8a96220cdf28e087211",
+      "peakDbFS": -26.290537590705796,
+      "duration": 0.53,
+      "layers": 4,
+      "visionReceipt": "c35d0e4e-44a8-4d70-8197-9850477eb063"
+    },
+    {
+      "id": "dig-discover",
+      "path": "public/audio/wildwood/dig-discover.wav",
+      "sha256": "a60e9f319815dc78989fd231c497fd98879f372c8f35ef7074cf9de8a09999f9",
+      "peakDbFS": -25.964406193993245,
+      "duration": 1.18,
+      "layers": 4,
+      "visionReceipt": "1f26bf2c-c677-45fc-93e6-9db779c598fc"
+    },
+    {
+      "id": "garden-till",
+      "path": "public/audio/wildwood/garden-till.wav",
+      "sha256": "0d53f9856c84e9cd10872ad90ead404a5edd8277d48f9cf5d159dc132ec6b46b",
+      "peakDbFS": -26.31153401512328,
+      "duration": 0.83,
+      "layers": 4,
+      "visionReceipt": "52da9c03-0dd6-4962-be92-b63cdb385311"
+    },
+    {
+      "id": "garden-water",
+      "path": "public/audio/wildwood/garden-water.wav",
+      "sha256": "5074972b91c96971ee2d5927822cdaae03fce42962b5fb2117e1d6e6e303cd70",
+      "peakDbFS": -25.62949485762008,
+      "duration": 1.37,
+      "layers": 5,
+      "visionReceipt": "7edcc9c9-af66-4b0c-8f98-ef7589c14793"
+    },
+    {
+      "id": "garden-bloom",
+      "path": "public/audio/wildwood/garden-bloom.wav",
+      "sha256": "71b03f5c0a145aa54aef244be4da3f43c7f53ca99b78ec14aec0c2fa82464e33",
+      "peakDbFS": -25.49910048438292,
+      "duration": 1.9,
+      "layers": 5,
+      "visionReceipt": "ac841717-9632-4cca-b5ca-cb7b0e70cfc9"
+    },
+    {
+      "id": "fish-cast",
+      "path": "public/audio/wildwood/fish-cast.wav",
+      "sha256": "78a22bf09b3678cfc5a56d5c1c5e12baccb0bb1d33640e3f4ecd9d7cc40b4b03",
+      "peakDbFS": -25.82876348392411,
+      "duration": 1.16,
+      "layers": 4,
+      "visionReceipt": "70004a4c-a8f5-48e0-8f42-832ea4c6f9b8"
+    },
+    {
+      "id": "fish-bite",
+      "path": "public/audio/wildwood/fish-bite.wav",
+      "sha256": "e9c5af681bf4b2350db1cad6f21cfbf4caa43cf30f18ffb89f1f618ff27de766",
+      "peakDbFS": -26.18517964874671,
+      "duration": 0.64,
+      "layers": 4,
+      "visionReceipt": "eb5c23c0-c6c6-4554-ab06-fa0cf11c3d56"
+    },
+    {
+      "id": "fish-reel",
+      "path": "public/audio/wildwood/fish-reel.wav",
+      "sha256": "af2add65f54d075fce41bdc2a2e6439540faa1446a5c01f9c196a0117926ed00",
+      "peakDbFS": -25.724345491832892,
+      "duration": 1.57,
+      "layers": 5,
+      "visionReceipt": "e828373f-9c81-4063-947a-7d10794a1559"
+    },
+    {
+      "id": "fish-escape",
+      "path": "public/audio/wildwood/fish-escape.wav",
+      "sha256": "acb1ff51209ea030cbb2361aaaebd1f70336757cdb3634473e67e17b12258303",
+      "peakDbFS": -25.665651188819712,
+      "duration": 0.85,
+      "layers": 4,
+      "visionReceipt": "b49a98a4-d3df-46ee-a881-4a0698f7057f"
+    },
+    {
+      "id": "tool-equip",
+      "path": "public/audio/wildwood/tool-equip.wav",
+      "sha256": "d312194a336fe5cd3377c6f730b2c4317d7e03209743ea79bf4ca7c087269d74",
+      "peakDbFS": -26.612812113691085,
+      "duration": 0.47,
+      "layers": 4,
+      "visionReceipt": "d40aabc1-a6f4-4abd-ab5b-47b3cfba8ab2"
+    },
+    {
+      "id": "bag-open",
+      "path": "public/audio/wildwood/bag-open.wav",
+      "sha256": "744503cc6c2dc649d80573767e9c0aef1b9313cf8b06646e2be29a2de51fbe05",
+      "peakDbFS": -26.03174322511986,
+      "duration": 0.9,
+      "layers": 4,
+      "visionReceipt": "2ff8c804-bde5-474b-b072-a2cb94075865"
+    },
+    {
+      "id": "craft-done",
+      "path": "public/audio/wildwood/craft-done.wav",
+      "sha256": "43504a91bb5e1ab3e3c892edd46f1ac5066a4c9a0386bde7c4d8b09cb8e3d1fe",
+      "peakDbFS": -25.69609743530868,
+      "duration": 1.35,
+      "layers": 5,
+      "visionReceipt": "55a21935-c2b0-4658-9a18-f307b2e40d52"
+    },
+    {
+      "id": "gift-give",
+      "path": "public/audio/wildwood/gift-give.wav",
+      "sha256": "9fdc32821f482999329579cd1720009c7defcb794c2e17245879a6d1ef5063a8",
+      "peakDbFS": -25.62711297066882,
+      "duration": 1.61,
+      "layers": 5,
+      "visionReceipt": "b6ffcf29-fb50-4615-b37a-0861878e9e5d"
+    },
+    {
+      "id": "quest-claimed",
+      "path": "public/audio/wildwood/quest-claimed.wav",
+      "sha256": "c20df902a7c90a0b34a2ba8cabc50cde6c48a033877f0abea54ee486b32de805",
+      "peakDbFS": -25.623656057572237,
+      "duration": 1.79,
+      "layers": 5,
+      "visionReceipt": "2c9a9033-1c39-4b8e-be66-f71d2a1e8955"
+    },
+    {
+      "id": "friend-wave",
+      "path": "public/audio/wildwood/friend-wave.wav",
+      "sha256": "d20cef44a5a540e06a9469bbd3575ad48860678c75bd99de62e124f0b9e56ca8",
+      "peakDbFS": -26.549145887610642,
+      "duration": 0.62,
+      "layers": 4,
+      "visionReceipt": "4d32dcb7-3909-4529-9d52-04d59bff191d"
+    }
+  ]
+}

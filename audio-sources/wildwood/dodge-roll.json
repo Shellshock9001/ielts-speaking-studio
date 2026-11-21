@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "sampleRate": 48000,
+  "duration": 0.8,
+  "gain": 0.74,
+  "seed": 68292,
+  "layers": [
+    {
+      "id": "dodge-roll/warm-body",
+      "role": "Acoustic material body: tuned timber and warm ceramic modes",
+      "kind": "modal",
+      "start": 0,
+      "duration": 0.6400000000000001,
+      "gain": 0.075,
+      "pan": -0.34,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.008,
+          0.94
+        ],
+        [
+          0.5400000000000001,
+          0.68
+        ],
+        [
+          0.6400000000000001,
+          0
+        ]
+      ],
+      "modes": [
+        {
+          "frequency": 141.5,
+          "decay": 0.2,
+          "amplitude": 0.6
+        },
+        {
+          "frequency": 486.76,
+          "decay": 0.264,
+          "amplitude": 0.25
+        },
+        {
+          "frequency": 936.73,
+          "decay": 0.11200000000000002,
+          "amplitude": 0.08
+        },
+        {
+          "frequency": 1460.28,
+          "decay": 0.064,
+          "amplitude": 0.045
+        }
+      ]
+    },
+    {
+      "id": "dodge-roll/glass-swish",
+      "role": "Distinct pitched response with pitch bend and soft inharmonic sparkle",
+      "kind": "fm",
+      "start": 0.064,
+      "duration": 0.576,
+      "gain": 0.056,
+      "pan": 0.34,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.045,
+          0.94
+        ],
+        [
+          0.31679999999999997,
+          0.68
+        ],
+        [
+          0.576,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          283
+        ],
+        [
+          0.576,
+          195.26999999999998
+        ]
+      ],
+      "ratio": 2.4,
+      "index": [
+        [
+          0,
+          0.47600000000000003
+        ],
+        [
+          0.576,
+          0.084
+        ]
+      ]
+    },
+    {
+      "id": "dodge-roll/velvet-air",
+      "role": "High-frequency soft surface air, no abrasive stock impact",
+      "kind": "noise",
+      "start": 0.019200000000000002,
+      "duration": 0.584,
+      "gain": 0.012,
+      "pan": -0.272,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.011,
+          0.94
+        ],
+        [
+          0.43399999999999994,
+          0.68
+        ],
+        [
+          0.584,
+          0
+        ]
+      ],
+      "cutoff": [
+        [
+          0,
+          3000
+        ],
+        [
+          0.584,
+          1440
+        ]
+      ],
+      "filter": "lowpass"
+    },
+    {
+      "id": "dodge-roll/answer-bell",
+      "role": "Secondary resonator answering from the opposite side of the scene",
+      "kind": "fm",
+      "start": 0.24,
+      "duration": 0.496,
+      "gain": 0.027,
+      "pan": 0.65,
+      "envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          0.03,
+          0.94
+        ],
+        [
+          0.32736,
+          0.68
+        ],
+        [
+          0.496,
+          0
+        ]
+      ],
+      "frequency": [
+        [
+          0,
+          424.5
+        ],
+        [
+          0.496,
+          543.36
+        ]
+      ],
+      "ratio": 2.88,
+      "index": [
+        [
+          0,
+          0.45
+        ],
+        [
+          0.496,
+          0.08
+        ]
+      ]
+    }
+  ]
+}
